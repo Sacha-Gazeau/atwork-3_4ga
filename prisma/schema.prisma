@@ -11,7 +11,7 @@ datasource db {
 }
 
 model Request {
-  id              String    @id @default(cuid())
+  id              Int    @id @default(autoincrement())
   firstName       String
   lastName        String
   email           String
@@ -22,6 +22,25 @@ model Request {
   gardenStyle     String
   maxPrice        String
   startDate       DateTime
+
+  images          RequestImage[]
+  planUrl         PlanUrl
+  // plus tard : planUrl ou une relation vers un modèle Plan
+}
+
+model RequestImage {
+  id        Int   @id @default(autoincrement())
+  url       String   // URL vers EdgeStore
+  request   Request  @relation(fields: [requestId], references: [id])
+  requestId String
+}
+
+
+model RequestImage {
+  id        Int   @id @default(autoincrement())
+  url       String   // URL vers EdgeStore
+  request   Request  @relation(fields: [requestId], references: [id])
+  requestId String
 }
 
 
@@ -41,7 +60,11 @@ model Image {
 
 model Question {
 
-  id            Int @id @default(autoincrement())
+  id            Int       @id @default(autoincrement())
   quest         String 
   answer        String 
+}
+
+model User {
+
 }
