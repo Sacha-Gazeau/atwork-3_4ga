@@ -17,6 +17,8 @@ model Request {
   email           String
   number          String
   city            String
+  address         String
+  zipCode         String
   gardenStyle     String
   maxPrice        String
   startDate       DateTime
@@ -27,4 +29,19 @@ model Style {
   id            Int       @id @default(autoincrement())
   name          String 
   description   String
+  
+  images        Images[]
+}
+
+model Image {
+  id            Int       @id @default(autoincrement())
+  filename      String 
+  style         Style @relation(fields: [styleId], references: [id])
+}
+
+model Question {
+
+  id            Int @id @default(autoincrement())
+  quest         String 
+  answer        String 
 }
