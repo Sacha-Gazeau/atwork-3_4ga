@@ -32,15 +32,15 @@ model RequestImage {
   id        Int   @id @default(autoincrement())
   url       String   // URL vers EdgeStore
   request   Request  @relation(fields: [requestId], references: [id])
-  requestId String
+  requestId Int
 }
 
 
-model RequestImage {
-  id        Int   @id @default(autoincrement())
-  url       String   // URL vers EdgeStore
-  request   Request  @relation(fields: [requestId], references: [id])
-  requestId String
+model RequestPlan {
+  id            Int   @id @default(autoincrement())
+  urlPlan       String   // URL vers EdgeStore
+  request       Request  @relation(fields: [requestId], references: [id])
+  requestId     Int
 }
 
 
