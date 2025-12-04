@@ -23,24 +23,16 @@ model Request {
   maxPrice        String
   startDate       DateTime
 
-  images          RequestImage[]
-  plan            RequestPlan[]
+  files          Requestfile[]
 }
 
-model RequestImage {
+model Requestfile {
   id        Int   @id @default(autoincrement())
   url       String 
   request   Request  @relation(fields: [requestId], references: [id])
   requestId Int
 }
 
-
-model RequestPlan {
-  id            Int   @id @default(autoincrement())
-  urlPlan       String  
-  request       Request  @relation(fields: [requestId], references: [id])
-  requestId     Int
-}
 
 
 model Style {
