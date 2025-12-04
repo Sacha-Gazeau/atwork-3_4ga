@@ -20,7 +20,9 @@ export default function RootLayout({
         <header className="navbar">
           <Navbar />
         </header>
-        <EdgeStoreProvider>{children}</EdgeStoreProvider>
+        <main>
+          <EdgeStoreProvider>{children}</EdgeStoreProvider>
+        </main>
         <footer className="footer">
           <Footer />
         </footer>

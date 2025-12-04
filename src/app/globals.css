@@ -1,9 +1,9 @@
 @import "tailwindcss";
 
 :root {
-  --background: #E8DCC2;
-  --background-item: #0B3D2E;
-  --foreground: #E8DCC2;
+  --background: #e8dcc2;
+  --background-item: #0b3d2e;
+  --foreground: #e8dcc2;
 }
 
 @theme inline {
@@ -15,8 +15,8 @@
 
 @media (prefers-color-scheme: dark) {
   :root {
-    --background: #0a0a0a;
-    --foreground: #E8DCC2;
+    --background: #e8dcc2;
+    --foreground: #000000;
   }
 }
 
@@ -26,13 +26,54 @@ body {
   font-family: Arial, Helvetica, sans-serif;
 }
 
+main {
+  min-height: 47.5rem;
+}
+
+.navbar {
+  background-color: var(--background-item);
+  color: var(--background);
+  padding: 1rem 0rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.navbar__logo {
+  font-weight: 700;
+  font-size: 3rem;
+}
+
+.navbar__nav {
+  /* styles du conteneur nav */
+}
+
+.navbar__list {
+  display: flex;
+  gap: 2rem;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.navbar__item {
+  /* si besoin */
+}
+
+.navbar__link {
+  text-decoration: none;
+  color: inherit;
+}
 
 .footer {
+  background-color: var(--background-item);
+  color: var(--background);
+
   display: flex;
   justify-content: space-between;
   align-items: center;
   padding: 0.5rem 1rem;
-  background-color: var(--background-item);
 }
 
 .footer--contact {

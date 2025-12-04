@@ -20,8 +20,6 @@ export default function Page() {
     setFiles((prev) => [...prev, ...selectedFiles]);
     setError(null);
 
-    // Reset the input value so the same files can be selected again if needed
-    event.target.value = "";
   };
 
   React.useEffect(() => {

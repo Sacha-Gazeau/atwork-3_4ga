@@ -1,18 +1,44 @@
 "use client";
 
+import Link from "next/link";
+
 export default function Navbar() {
   return (
     <>
-      <h1>LOGO</h1>
+      <h1 className="navbar__logo">LOGO</h1>
 
-      <nav>
-        <ul>
-            <li><a href="">Home</a></li>
-            <li><a href="">Start</a></li>
-            <li><a href="">Aanpak</a></li>
-            <li><a href="">QA</a></li>
-            <li><a href="">Inspiratie</a></li>
-            <li><a href="">Contact</a></li>
+      <nav className="navbar__nav">
+        <ul className="navbar__list">
+          <li className="navbar__item">
+            <Link href="/" className="navbar__link">
+              Home
+            </Link>
+          </li>
+          <li className="navbar__item">
+            <Link href="/start" className="navbar__link">
+              Start
+            </Link>
+          </li>
+          <li className="navbar__item">
+            <Link href="/#aanpak" className="navbar__link">
+              Aanpak
+            </Link>
+          </li>
+          <li className="navbar__item">
+            <Link href="/qa" className="navbar__link">
+              QA
+            </Link>
+          </li>
+          <li className="navbar__item">
+            <Link href="/inspiratie" className="navbar__link">
+              Inspiratie
+            </Link>
+          </li>
+          <li className="navbar__item">
+            <Link href="/contact" className="navbar__link">
+              Contact
+            </Link>
+          </li>
         </ul>
       </nav>
     </>
