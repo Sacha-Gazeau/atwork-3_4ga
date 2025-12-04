@@ -45,10 +45,6 @@ main {
   font-size: 3rem;
 }
 
-.navbar__nav {
-  /* styles du conteneur nav */
-}
-
 .navbar__list {
   display: flex;
   gap: 2rem;

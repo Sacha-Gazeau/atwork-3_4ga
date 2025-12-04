@@ -19,7 +19,6 @@ export default function Page() {
     // Add the new files to the already selected ones
     setFiles((prev) => [...prev, ...selectedFiles]);
     setError(null);
-
   };
 
   React.useEffect(() => {
@@ -73,7 +72,37 @@ export default function Page() {
   };
 
   return (
-    <div style={{ padding: "1rem" }}>
+    <>
+      <form action="">
+        <label>
+          <input type="text" name="firstName" placeholder="Voornaam" />
+        </label>
+        <label>
+          <input type="text" name="lastName" placeholder="Achternaam" />
+        </label>
+        <label>
+          <input type="email" name="email" placeholder="Email" />
+        </label>
+        <label>
+          <input type="number" name="number" placeholder="GSM number" />
+        </label>
+        <label>
+          <input type="text" name="zipCode" placeholder="Postcode" />
+        </label>
+        <label>
+          <input type="text" name="city" placeholder="Stad" />
+        </label>
+        <label>
+          <input type="date" name="startDate" />
+        </label>
+        <label>
+          <input
+            type="number"
+            name="maxPrice"
+            placeholder="maximale totaalprijs"
+          />
+        </label>
+      </form>
       <input
         type="file"
         accept="image/*"
@@ -189,6 +218,6 @@ export default function Page() {
           </div>
         </div>
       )}
-    </div>
+    </>
   );
 }
