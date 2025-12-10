@@ -10,11 +10,26 @@ datasource db {
   provider = "sqlite"
 }
 
+
+model User {
+  id        String      @id @default(cuid())
+  firstName String
+  lastName  String
+  email     String    @unique
+  hashedPassword  String
+
+  role          Role
+  request       Request?
+}
+
+enum Role {
+  CLIENT
+  ADMIN
+}
+
+
 model Request {
   id              Int    @id @default(autoincrement())
-  firstName       String
-  lastName        String
-  email           String
   number          String
   city            String
   address         String
@@ -22,7 +37,10 @@ model Request {
   gardenStyle     String
   maxPrice        String
   startDate       DateTime
+  userId          String @unique 
 
+
+  user           User   @relation(fields: [userId], references: [id])
   files          Requestfile[]
 }
 
@@ -34,7 +52,6 @@ model Requestfile {
 }
 
 
-
 model Style {
   id            Int       @id @default(autoincrement())
   name          String 
@@ -42,14 +59,18 @@ model Style {
   sketch        String
   features      String?
   
-  images        Images[]
+  images        Image[]
 }
 
 model Image {
   id            Int       @id @default(autoincrement())
   filename      String 
+  styleId       Int
+
   style         Style @relation(fields: [styleId], references: [id])
 }
+
+
 
 model Question {
   id            Int       @id @default(autoincrement())

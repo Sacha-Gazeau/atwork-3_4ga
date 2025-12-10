@@ -105,6 +105,7 @@ export default function Page() {
         </label>
         <label className="request-form__field">
           <input
+          
             type="file"
             name="file"
             accept="image/*,application/pdf"
