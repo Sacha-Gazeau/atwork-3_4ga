@@ -11,7 +11,7 @@
   "dependencies": {
     "@edgestore/react": "^0.5.4",
     "@edgestore/server": "^0.5.4",
-    "@prisma/client": "^7.1.0",
+    "@prisma/client": "5.19.1",
     "next": "15.5.2",
     "react": "19.1.0",
     "react-dom": "19.1.0",
@@ -25,8 +25,11 @@
     "@types/react-dom": "^19",
     "eslint": "^9",
     "eslint-config-next": "15.5.2",
-    "prisma": "^7.1.0",
+    "prisma": "5.19.1",
     "tailwindcss": "^4",
     "typescript": "^5"
-  }
+  },
+  "prisma": {
+  "seed": "node prisma/seed.ts"
+}
 }

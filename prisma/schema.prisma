@@ -2,14 +2,14 @@
 // learn more about it in the docs: https://pris.ly/d/prisma-schema
 
 generator client {
-  provider = "prisma-client"
+  provider = "prisma-client-js"
   output   = "../src/app/_generated/prisma"
 }
 
 datasource db {
   provider = "sqlite"
+  url      = env("DATABASE_URL")
 }
-
 
 model User {
   id        String      @id @default(cuid())
@@ -18,13 +18,8 @@ model User {
   email     String    @unique
   hashedPassword  String
 
-  role          Role
+  role          String @default("CLIENT")
   request       Request?
-}
-
-enum Role {
-  CLIENT
-  ADMIN
 }
 
 

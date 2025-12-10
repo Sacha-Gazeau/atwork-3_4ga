@@ -3,7 +3,10 @@
 :root {
   --background: #e8dcc2;
   --background-item: #0b3d2e;
+  --background-item-trans: lab(22.32% -20.57 4.62 / 0.10);
   --foreground: #e8dcc2;
+  --border-item: #e0d4b3;
+  --dark: #333333;
 }
 
 @theme inline {
@@ -131,4 +134,61 @@ main {
 
 .request-form__submit:active {
   transform: translateY(0);
+}
+
+/* FAQ / Veelgestelde vragen */
+.faq {
+  max-width: 900px;
+  margin: 3rem auto;
+  padding: 0 1.5rem;
+}
+
+.faq-title {
+  font-size: 2.4rem;
+  font-weight: 700;
+  margin-bottom: 2.5rem;
+  color: var(--background-item);
+}
+
+.faq-list {
+  border-top: 1px solid var(--background-item-trans);
+}
+
+.faq-item {
+  border-bottom: 1px solid var(--background-item-trans);
+  padding: 0;
+}
+
+.faq-question {
+  cursor: pointer;
+  list-style: none;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1.1rem 0;
+  font-size: 1.05rem;
+  font-weight: 600;
+  color: var(--background-item);
+}
+
+.faq-question::-webkit-details-marker {
+  display: none;
+}
+
+.faq-chevron {
+  font-size: 0.9rem;
+  transform-origin: center;
+  transition: transform 0.2s ease;
+}
+
+.faq-item[open] .faq-chevron {
+  transform: rotate(180deg);
+}
+
+.faq-answer {
+  padding: 0 0 1.1rem 0;
+  max-width: 60rem;
+  color: var(--dark);
+  line-height: 1.5;
+  font-size: 0.95rem;
 }

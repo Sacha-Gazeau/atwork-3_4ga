@@ -1,18 +1,30 @@
 import prisma from "@/lib/client";
 
 export default async function Question() {
-  const questions = await prisma.question.findMany();
+  const questions = await prisma.question.findMany({
+    orderBy: { id: "asc" },
+  });
 
   return (
-    <div>
-      <h2>Veelgestelde vragen</h2>
-      <ul>
+    <section className="faq">
+      <h2 className="faq-title">Veelgestelde vragen</h2>
+
+      <div className="faq-list">
         {questions.map((q) => (
-          <li key={q.id}>
-            <p>{q.quest}</p>
-            <p>{q.answer}</p>
-          </li>
+          <details key={q.id} className="faq-item">
+            <summary className="faq-question">
+              <span>{q.quest}</span>
+
+              {/* Chevron */}
+              <span className="faq-chevron" aria-hidden="true">
+                ▼
+              </span>
+            </summary>
+
+            <p className="faq-answer">{q.answer}</p>
+          </details>
         ))}
-      </ul>
-    </div>
+      </div>
+    </section>
   );
+}
