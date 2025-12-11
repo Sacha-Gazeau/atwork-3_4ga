@@ -8,6 +8,9 @@ export default function Page() {
   const [previews, setPreviews] = React.useState<string[]>([]);
   const [previewUrl, setPreviewUrl] = React.useState<string | null>(null);
   const [error, setError] = React.useState<string | null>(null);
+  const [successMessage, setSuccessMessage] = React.useState<string | null>(
+    null
+  );
   const { edgestore } = useEdgeStore();
 
   const handleFilesChange = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -42,192 +45,149 @@ export default function Page() {
     setPreviewUrl(null);
   };
 
-  const handleUpload = async () => {
+  const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+
     if (files.length < 5) {
-      setError("You must select at least 5 images.");
+      setError("U moet minimaal 5 afbeeldingen selecteren.");
       return;
     }
 
     try {
       setError(null);
 
+      // Upload files to EdgeStore first
       const uploadPromises = files.map((file) =>
         edgestore.publicFiles.upload({
           file,
-          onProgressChange: (progress) => {
-            console.log(file.name, progress);
-          },
         })
       );
 
-      const results = await Promise.all(uploadPromises);
-      console.log(results);
+      const uploadResults = await Promise.all(uploadPromises);
 
-      // Optional: clear the selection after upload
+      // Get form data
+      const form = event.target as HTMLFormElement;
+      const formData = new FormData(form);
+      const formValues = {
+        firstName: formData.get("firstName"),
+        lastName: formData.get("lastName"),
+        email: formData.get("email"),
+        number: formData.get("number"),
+        zipCode: formData.get("zipCode"),
+        city: formData.get("city"),
+        startDate: formData.get("startDate"),
+        maxPrice: formData.get("maxPrice"),
+        fileUrls: uploadResults.map((result) => result.url),
+      };
+
+      setSuccessMessage("Formulier succesvol verzonden!");
+      setTimeout(() => setSuccessMessage(null), 5000);
       setFiles([]);
+      form.reset();
     } catch (err) {
-      console.error(err);
-      setError("An error occurred during the upload.");
+      setError("Er is een fout opgetreden tijdens het verzenden.");
     }
   };
 
   return (
     <>
-      <h2>Start form</h2>
-      <form action="" className="request-form">
-        <label className="request-form__field">
-          <input type="text" name="firstName" placeholder="Voornaam" />
-        </label>
-        <label className="request-form__field">
-          <input type="text" name="lastName" placeholder="Achternaam" />
-        </label>
-        <label className="request-form__field">
-          <input type="email" name="email" placeholder="Email" />
-        </label>
-        <label className="request-form__field">
-          <input type="number" name="number" placeholder="GSM number" />
-        </label>
-        <label className="request-form__field">
-          <input type="text" name="zipCode" placeholder="Postcode" />
-        </label>
-        <label className="request-form__field">
-          <input type="text" name="city" placeholder="Stad" />
-        </label>
-        <label className="request-form__field">
-          <input type="date" name="startDate" />
-        </label>
+      <div style={{ textAlign: "center" }}>
+        <h2 className="page-title">Start form</h2>
+      </div>
+      <form onSubmit={handleSubmit} className="request-form">
         <label className="request-form__field">
           <input
-            type="number"
-            name="maxPrice"
-            placeholder="maximale totaalprijs"
-          />
-        </label>
-        <label className="request-form__field">
-          <input
-          
             type="file"
             name="file"
             accept="image/*,application/pdf"
             multiple
             onChange={handleFilesChange}
+            className="file-upload-input"
+            id="file-upload"
           />
+          <label htmlFor="file-upload" className="file-upload-label">
+            Bestand toevoegen (Foto&apos;s van de tuin)
+          </label>
         </label>
+
+        {files.length > 0 && (
+          <div className="file-list-container">
+            <div className="file-list">
+              {files.map((file, index) => (
+                <div key={index} className="file-item">
+                  <span
+                    className="file-item__name"
+                    onClick={() => handleOpenPreview(previews[index])}
+                    title={file.name}
+                  >
+                    {file.name}
+                  </span>
+                  <button
+                    type="button"
+                    onClick={() => handleRemoveFile(index)}
+                    className="file-item__remove"
+                    title="Remove"
+                  >
+                    ✕
+                  </button>
+                </div>
+              ))}
+            </div>
+          </div>
+        )}
+
         <button type="submit" className="request-form__submit">
           Versturen
         </button>
       </form>
-      <p>
+
+      <p className="form-note">
         Indien de klant geen (duidelijk) plan heeft is opmeting door DIY tuinen
         mogelijk voor een meerprijs, afhankelijk van de gemeente van de klant
       </p>
 
-      {error && <p style={{ color: "red" }}>{error}</p>}
-
-      {files.length > 0 && (
-        <div style={{ marginTop: "1rem" }}>
-          <div
-            style={{
-              display: "flex",
-              gap: "0.5rem",
-              flexWrap: "wrap",
-            }}
-          >
-            {files.map((file, index) => (
-              <div
-                key={index}
-                style={{
-                  border: "1px solid #ccc",
-                  padding: "0.5rem",
-                  borderRadius: "4px",
-                  maxWidth: "150px",
-                }}
-              >
-                {previews[index] && (
-                  <p
-                    style={{
-                      fontSize: "0.8rem",
-                      marginTop: "0.25rem",
-                      wordBreak: "break-all",
-                    }}
-                    onClick={() => handleOpenPreview(previews[index])}
-                  >
-                    {file.name}
-                  </p>
-                )}
-                <button
-                  type="button"
-                  color="red"
-                  onClick={() => handleRemoveFile(index)}
-                  style={{ marginTop: "0.25rem" }}
-                >
-                  Remove
-                </button>
-              </div>
-            ))}
-          </div>
-
-          <button
-            type="button"
-            onClick={handleUpload}
-            disabled={files.length < 5}
-            style={{
-              marginTop: "1rem",
-              opacity: files.length < 5 ? 0.5 : 1,
-              cursor: files.length < 5 ? "not-allowed" : "pointer",
-            }}
-          >
-            Upload ({files.length} images)
-          </button>
-        </div>
-      )}
-
       {previewUrl && (
-        <div
-          onClick={handleClosePreview}
-          style={{
-            position: "fixed",
-            inset: 0,
-            background: "rgba(0,0,0,0.7)",
-            display: "flex",
-            alignItems: "center",
-            justifyContent: "center",
-            zIndex: 50,
-          }}
-        >
+        <div onClick={handleClosePreview} className="preview-modal">
           <div
-            style={{
-              position: "relative",
-              maxWidth: "90%",
-              maxHeight: "90%",
-            }}
+            onClick={(e) => e.stopPropagation()}
+            className="preview-modal__content"
           >
             <img
               src={previewUrl}
               alt="Preview"
-              style={{
-                maxWidth: "100%",
-                maxHeight: "100%",
-                objectFit: "contain",
-                display: "block",
-              }}
+              className="preview-modal__image"
             />
             <button
               type="button"
               onClick={handleClosePreview}
-              style={{
-                position: "absolute",
-                top: 8,
-                right: 8,
-                padding: "0.25rem 0.5rem",
-                background: "#fff",
-                border: "none",
-                cursor: "pointer",
-              }}
+              className="preview-modal__close"
             >
-              Close
+              ✕ Close
             </button>
           </div>
+        </div>
+      )}
+
+      {error && (
+        <div className="toast toast--error">
+          <span className="toast__icon">⚠</span>
+          {error}
+          <button onClick={() => setError(null)} className="toast__close">
+            ✕
+          </button>
+        </div>
+      )}
+
+      {successMessage && (
+        <div className="toast toast--success">
+          <span className="toast__icon">✓</span>
+          {successMessage}
+          <button
+            onClick={() => setSuccessMessage(null)}
+            className="toast__close"
+          >
+            ✕
+          </button>
         </div>
       )}
     </>
