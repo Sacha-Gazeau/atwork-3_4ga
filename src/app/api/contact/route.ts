@@ -32,6 +32,7 @@ export async function POST(req: Request) {
       CONTACT_SMTP_PORT,
       CONTACT_SMTP_USER,
       CONTACT_SMTP_PASS,
+      CONTACT_FROM_EMAIL,
       CONTACT_TO_EMAIL,
     } = process.env;
 
@@ -40,6 +41,7 @@ export async function POST(req: Request) {
       !CONTACT_SMTP_PORT ||
       !CONTACT_SMTP_USER ||
       !CONTACT_SMTP_PASS ||
+      !CONTACT_FROM_EMAIL ||
       !CONTACT_TO_EMAIL
     ) {
       return jsonResponse(
@@ -48,17 +50,25 @@ export async function POST(req: Request) {
       );
     }
 
-    const port = Number(CONTACT_SMTP_PORT) || 587;
+    const port = Number(CONTACT_SMTP_PORT) || 465;
 
     const transporter = nodemailer.createTransport({
       host: CONTACT_SMTP_HOST,
       port,
       secure: port === 465,
+      requireTLS: port === 587,
       auth: {
         user: CONTACT_SMTP_USER,
         pass: CONTACT_SMTP_PASS,
       },
+      // Timeouts to avoid long hangs and help surface ETIMEDOUT quickly
+      connectionTimeout: 15000, // ms
+      greetingTimeout: 15000,
+      socketTimeout: 15000,
     });
+
+    // verify connection configuration early to fail fast on network issues
+    await transporter.verify();
 
     const subject = `Contact form: ${firstName} ${lastName}`;
     const textBody = `Name: ${firstName} ${lastName}\nEmail: ${email}\n\n${text}`;
@@ -68,7 +78,7 @@ export async function POST(req: Request) {
     )}</div>`;
 
     await transporter.sendMail({
-      from: CONTACT_SMTP_USER,
+      from: CONTACT_FROM_EMAIL,
       to: CONTACT_TO_EMAIL,
       subject,
       text: textBody,
@@ -79,10 +89,9 @@ export async function POST(req: Request) {
     return jsonResponse({ success: true }, 200);
   } catch (err: any) {
     console.error("/api/contact error:", err);
-    return jsonResponse(
-      { success: false, error: err?.message || "Server error" },
-      500
-    );
+    const code = err?.code || err?.errno || null;
+    const message = err?.message || "Server error";
+    return jsonResponse({ success: false, error: message, code }, 500);
   }
 }
 
