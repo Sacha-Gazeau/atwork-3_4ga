@@ -13,6 +13,7 @@
     "@edgestore/server": "^0.5.4",
     "@prisma/client": "5.19.1",
     "next": "15.5.2",
+    "nodemailer": "^7.0.11",
     "react": "19.1.0",
     "react-dom": "19.1.0",
     "zod": "^4.1.13"
@@ -30,6 +31,6 @@
     "typescript": "^5"
   },
   "prisma": {
-  "seed": "node prisma/seed.ts"
-}
+    "seed": "node prisma/seed.ts"
+  }
 }
