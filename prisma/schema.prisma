@@ -2,19 +2,29 @@
 // learn more about it in the docs: https://pris.ly/d/prisma-schema
 
 generator client {
-  provider = "prisma-client"
+  provider = "prisma-client-js"
   output   = "../src/app/_generated/prisma"
 }
 
 datasource db {
   provider = "sqlite"
+  url      = env("DATABASE_URL")
 }
+
+model User {
+  id        String      @id @default(cuid())
+  firstName String
+  lastName  String
+  email     String    @unique
+  hashedPassword  String
+
+  role          String @default("CLIENT")
+  request       Request?
+}
+
 
 model Request {
   id              Int    @id @default(autoincrement())
-  firstName       String
-  lastName        String
-  email           String
   number          String
   city            String
   address         String
@@ -22,25 +32,18 @@ model Request {
   gardenStyle     String
   maxPrice        String
   startDate       DateTime
+  userId          String @unique 
 
-  images          RequestImage[]
-  planUrl         PlanUrl
-  // plus tard : planUrl ou une relation vers un modèle Plan
+
+  user           User   @relation(fields: [userId], references: [id])
+  files          Requestfile[]
 }
 
-model RequestImage {
+model Requestfile {
   id        Int   @id @default(autoincrement())
-  url       String   // URL vers EdgeStore
+  url       String 
   request   Request  @relation(fields: [requestId], references: [id])
   requestId Int
-}
-
-
-model RequestPlan {
-  id            Int   @id @default(autoincrement())
-  urlPlan       String   // URL vers EdgeStore
-  request       Request  @relation(fields: [requestId], references: [id])
-  requestId     Int
 }
 
 
@@ -48,23 +51,24 @@ model Style {
   id            Int       @id @default(autoincrement())
   name          String 
   description   String
+  sketch        String
+  features      String?
   
-  images        Images[]
+  images        Image[]
 }
 
 model Image {
   id            Int       @id @default(autoincrement())
   filename      String 
+  styleId       Int
+
   style         Style @relation(fields: [styleId], references: [id])
 }
 
-model Question {
 
+
+model Question {
   id            Int       @id @default(autoincrement())
   quest         String 
   answer        String 
-}
-
-model User {
-
 }

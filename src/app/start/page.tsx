@@ -19,7 +19,6 @@ export default function Page() {
     // Add the new files to the already selected ones
     setFiles((prev) => [...prev, ...selectedFiles]);
     setError(null);
-
   };
 
   React.useEffect(() => {
@@ -73,13 +72,55 @@ export default function Page() {
   };
 
   return (
-    <div style={{ padding: "1rem" }}>
-      <input
-        type="file"
-        accept="image/*"
-        multiple
-        onChange={handleFilesChange}
-      />
+    <>
+      <h2>Start form</h2>
+      <form action="" className="request-form">
+        <label className="request-form__field">
+          <input type="text" name="firstName" placeholder="Voornaam" />
+        </label>
+        <label className="request-form__field">
+          <input type="text" name="lastName" placeholder="Achternaam" />
+        </label>
+        <label className="request-form__field">
+          <input type="email" name="email" placeholder="Email" />
+        </label>
+        <label className="request-form__field">
+          <input type="number" name="number" placeholder="GSM number" />
+        </label>
+        <label className="request-form__field">
+          <input type="text" name="zipCode" placeholder="Postcode" />
+        </label>
+        <label className="request-form__field">
+          <input type="text" name="city" placeholder="Stad" />
+        </label>
+        <label className="request-form__field">
+          <input type="date" name="startDate" />
+        </label>
+        <label className="request-form__field">
+          <input
+            type="number"
+            name="maxPrice"
+            placeholder="maximale totaalprijs"
+          />
+        </label>
+        <label className="request-form__field">
+          <input
+          
+            type="file"
+            name="file"
+            accept="image/*,application/pdf"
+            multiple
+            onChange={handleFilesChange}
+          />
+        </label>
+        <button type="submit" className="request-form__submit">
+          Versturen
+        </button>
+      </form>
+      <p>
+        Indien de klant geen (duidelijk) plan heeft is opmeting door DIY tuinen
+        mogelijk voor een meerprijs, afhankelijk van de gemeente van de klant
+      </p>
 
       {error && <p style={{ color: "red" }}>{error}</p>}
 
@@ -189,6 +230,6 @@ export default function Page() {
           </div>
         </div>
       )}
-    </div>
+    </>
   );
 }
