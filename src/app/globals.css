@@ -3,7 +3,7 @@
 :root {
   --background: #e8dcc2;
   --background-item: #0b3d2e;
-  --background-item-trans: lab(22.32% -20.57 4.62 / 0.10);
+  --background-item-trans: lab(22.32% -20.57 4.62 / 0.1);
   --foreground: #e8dcc2;
   --border-item: #e0d4b3;
   --dark: #333333;
@@ -56,10 +56,6 @@ main {
   padding: 0;
 }
 
-.navbar__item {
-  /* si besoin */
-}
-
 .navbar__link {
   text-decoration: none;
   color: inherit;
@@ -95,25 +91,32 @@ main {
   flex-direction: column;
   gap: 0.25rem;
   font-size: 0.9rem;
-}
-
-.request-form__field span {
+  & span {
   font-weight: 500;
 }
+}
 
-.request-form__field input {
+
+.request-form__field input,
+.request-form__field textarea {
   padding: 0.6rem 0.75rem;
   border-radius: 8px;
   border: 1px solid #edb09b;
   font-size: 0.95rem;
   outline: none;
+  &:focus {
+    border-color: var(--background-item);
+    box-shadow: 0 0 0 2px rgba(11, 61, 46, 0.15);
+  }
 }
 
-.request-form__field input:focus {
-  border-color: var(--background-item);
-  box-shadow: 0 0 0 2px rgba(11, 61, 46, 0.15);
+.request-form__duo {
+  display: flex;
+  gap: 1rem;
+  & label {
+    width: 100%;
+  }
 }
-
 .request-form__submit {
   margin-top: 0.5rem;
   padding: 0.8rem 1rem;
@@ -125,16 +128,15 @@ main {
   font-size: 1rem;
   cursor: pointer;
   transition: background 0.15s ease, transform 0.1s ease;
+  &:hover {
+    background: var(--background-item);
+    transform: translateY(-1px);
+  }
+  &:active {
+    transform: translateY(0);
+  }
 }
 
-.request-form__submit:hover {
-  background: var(--background-item);
-  transform: translateY(-1px);
-}
-
-.request-form__submit:active {
-  transform: translateY(0);
-}
 
 /* FAQ / Veelgestelde vragen */
 .faq {
