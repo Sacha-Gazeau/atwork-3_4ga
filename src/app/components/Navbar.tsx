@@ -1,11 +1,17 @@
 "use client";
 
 import Link from "next/link";
+import Image from "next/image";
 
 export default function Navbar() {
   return (
     <>
-      <h1 className="navbar__logo">LOGO</h1>
+      <Image
+        src="/Phil-Co-text-E8DCC2.png"
+        alt="logo"
+        width={150}
+        height={50}
+      />
 
       <nav className="navbar__nav">
         <ul className="navbar__list">
