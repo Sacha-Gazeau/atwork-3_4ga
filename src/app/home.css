@@ -68,6 +68,8 @@
 }
 
 .hero__button {
+  display: inline-block;
+  text-decoration: none;
   background-color: var(--background-item);
   color: var(--background);
   border: none;

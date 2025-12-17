@@ -1,4 +1,5 @@
 import Image from "next/image";
+import Link from "next/link";
 import "./home.css";
 
 export default function Home() {
@@ -24,7 +25,9 @@ export default function Home() {
             Voor gezinnen met een beperkt budget die hun tuin willen
             transformeren
           </p>
-          <button className="hero__button">Kies uw tuinstijl</button>
+          <Link href="/inspiratie" className="hero__button">
+            Kies uw tuinstijl
+          </Link>
         </div>
       </section>
 
