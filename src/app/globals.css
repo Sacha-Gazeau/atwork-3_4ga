@@ -37,16 +37,13 @@ footer.footer {
   margin-top: 0;
 }
 
-/* --- Navbar Styles --- */
 .navbar {
   background-color: var(--background-item);
   color: var(--background);
   padding: 0.5rem 1rem;
-  /* Remove flex-direction column here to allow header/menu separation */
   display: block;
 }
 
-/* Header container for Logo + Toggle */
 .navbar__header {
   display: flex;
   justify-content: space-between;
@@ -56,10 +53,9 @@ footer.footer {
 
 .navbar img {
   margin-bottom: 0;
-  display: block; /* Fix for Next/Image spacing */
+  display: block;
 }
 
-/* Toggle Button (Hamburger) */
 .navbar__toggle {
   background: none;
   border: none;
@@ -76,14 +72,12 @@ footer.footer {
   height: 2rem;
 }
 
-/* The Menu Container */
 .navbar__menu {
-  display: none; /* Hidden by default on mobile */
+  display: none;
   width: 100%;
   margin-top: 1rem;
 }
 
-/* When the menu is open (applied via React state) */
 .navbar__menu--open {
   display: block;
   animation: slideDown 0.3s ease-out;
@@ -91,7 +85,7 @@ footer.footer {
 
 .navbar__list {
   display: flex;
-  flex-direction: column; /* Stack links vertically on mobile */
+  flex-direction: column;
   gap: 1.5rem;
   list-style: none;
   margin: 0;
@@ -109,7 +103,6 @@ footer.footer {
   padding: 0.5rem;
 }
 
-/* Simple animation for the menu */
 @keyframes slideDown {
   from {
     opacity: 0;
@@ -121,7 +114,6 @@ footer.footer {
   }
 }
 
-/* --- Desktop Styles (Large Screens) --- */
 @media (min-width: 769px) {
   .navbar {
     display: flex;
@@ -131,22 +123,22 @@ footer.footer {
   }
 
   .navbar__header {
-    justify-content: center; /* Center logo on desktop */
+    justify-content: center;
     width: auto;
   }
 
   .navbar__toggle {
-    display: none; /* Hide hamburger on desktop */
+    display: none;
   }
 
   .navbar__menu {
-    display: block; /* Always visible on desktop */
+    display: block;
     margin-top: 0;
     width: auto;
   }
 
   .navbar__list {
-    flex-direction: row; /* Horizontal links on desktop */
+    flex-direction: row;
     gap: 2rem;
     padding: 0;
     border-top: none;
@@ -343,7 +335,6 @@ footer.footer {
   font-size: 0.95rem;
 }
 
-/* File upload custom button */
 .file-upload-input {
   display: none;
 }
@@ -365,7 +356,6 @@ footer.footer {
   box-shadow: 0 0 0 2px rgba(11, 61, 46, 0.15);
 }
 
-/* Toast notifications */
 .toast {
   position: fixed;
   bottom: 2rem;
@@ -457,7 +447,6 @@ footer.footer {
   line-height: 1;
 }
 
-/* Preview modal */
 .preview-modal {
   position: fixed;
   inset: 0;
@@ -512,11 +501,7 @@ footer.footer {
   }
 }
 
-/* ===================================
-   Responsive Design - Mobile First
-   =================================== */
 
-/* Phone screens (320px - 480px) */
 @media (max-width: 480px) {
   body {
     font-size: 14px;
@@ -547,7 +532,6 @@ footer.footer {
   }
 }
 
-/* Tablet screens (481px - 768px) */
 @media (max-width: 768px) {
   body {
     font-size: 15px;
@@ -572,7 +556,6 @@ footer.footer {
   }
 }
 
-/* Small devices (max-width: 640px) */
 @media (max-width: 640px) {
   body {
     display: flex;
@@ -655,21 +638,18 @@ footer.footer {
   }
 }
 
-/* Medium screens (769px - 1024px) */
 @media (min-width: 769px) and (max-width: 1024px) {
   .navbar__list {
     gap: 1.75rem;
   }
 }
 
-/* Large screens (1025px and above) */
 @media (min-width: 1025px) {
   body {
     font-size: 16px;
   }
 }
 
-/* Reduced motion preference */
 @media (prefers-reduced-motion: reduce) {
   * {
     animation-duration: 0.01ms !important;
@@ -678,7 +658,6 @@ footer.footer {
   }
 }
 
-/* High resolution screens */
 @media (min-width: 1920px) {
   body {
     font-size: 17px;
