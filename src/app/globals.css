@@ -86,10 +86,10 @@ footer.footer {
 .navbar__list {
   display: flex;
   flex-direction: column;
-  gap: 1.5rem;
+  gap: 2rem;
   list-style: none;
   margin: 0;
-  padding: 1rem 0;
+  padding: 1.5rem 0;
   text-align: center;
   border-top: 1px solid var(--background-item-trans);
 }
@@ -97,10 +97,10 @@ footer.footer {
 .navbar__link {
   text-decoration: none;
   color: inherit;
-  font-size: 1.1rem;
+  font-size: 1.3rem;
   font-weight: 500;
   display: block;
-  padding: 0.5rem;
+  padding: 1rem;
 }
 
 @keyframes slideDown {
@@ -145,8 +145,8 @@ footer.footer {
   }
 
   .navbar__link {
-    font-size: 1rem;
-    padding: 0;
+    font-size: 1.3rem;
+    padding: 1rem;
   }
 }
 .footer {
@@ -500,7 +500,6 @@ footer.footer {
     opacity: 1;
   }
 }
-
 
 @media (max-width: 480px) {
   body {
