@@ -58,7 +58,9 @@ export default function Contact() {
 
   return (
     <>
-      <h2>Contact form</h2>
+      <div style={{ textAlign: "center" }}>
+        <h2 className="page-title">Contact form</h2>
+      </div>
       <form className="request-form" onSubmit={handleSubmit}>
         <div className="request-form__duo">
           <label className="request-form__field">
