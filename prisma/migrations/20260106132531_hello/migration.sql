@@ -4,6 +4,9 @@ CREATE TABLE "User" (
     "firstName" TEXT NOT NULL,
     "lastName" TEXT NOT NULL,
     "email" TEXT NOT NULL,
+    "phoneNumber" TEXT NOT NULL,
+    "zipCode" TEXT NOT NULL,
+    "city" TEXT NOT NULL,
     "hashedPassword" TEXT NOT NULL,
     "role" TEXT NOT NULL DEFAULT 'CLIENT'
 );
@@ -11,14 +14,13 @@ CREATE TABLE "User" (
 -- CreateTable
 CREATE TABLE "Request" (
     "id" INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
-    "number" TEXT NOT NULL,
-    "city" TEXT NOT NULL,
-    "address" TEXT NOT NULL,
-    "zipCode" TEXT NOT NULL,
+    "serviceType" TEXT NOT NULL,
     "gardenStyle" TEXT NOT NULL,
-    "maxPrice" TEXT NOT NULL,
-    "startDate" DATETIME NOT NULL,
+    "budget" TEXT NOT NULL,
+    "deadline" TEXT NOT NULL,
+    "addons" TEXT NOT NULL,
     "userId" TEXT NOT NULL,
+    "createdAt" DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
     CONSTRAINT "Request_userId_fkey" FOREIGN KEY ("userId") REFERENCES "User" ("id") ON DELETE RESTRICT ON UPDATE CASCADE
 );
 
@@ -56,6 +58,3 @@ CREATE TABLE "Question" (
 
 -- CreateIndex
 CREATE UNIQUE INDEX "User_email_key" ON "User"("email");
-
--- CreateIndex
-CREATE UNIQUE INDEX "Request_userId_key" ON "Request"("userId");
