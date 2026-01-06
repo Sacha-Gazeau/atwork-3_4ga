@@ -75,8 +75,14 @@ export default function Navbar() {
             </Link>
           </li>
           <li className="navbar__item">
-            <Link href="/#aanpak" className="navbar__link" onClick={closeMenu}>
-              Aanpak
+            <Link
+              href="https://phil-co.odoo.com/shop"
+              className="navbar__link"
+              target="_blank"
+              rel="noopener noreferrer"
+              onClick={closeMenu}
+            >
+              Shop
             </Link>
           </li>
           <li className="navbar__item">
