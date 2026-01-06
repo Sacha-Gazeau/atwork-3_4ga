@@ -16,27 +16,29 @@ model User {
   firstName String
   lastName  String
   email     String    @unique
+  phoneNumber String
+  zipCode     String
+  city        String
   hashedPassword  String
 
   role          String @default("CLIENT")
-  request       Request?
+  requests      Request[]
 }
 
 
 model Request {
-  id              Int    @id @default(autoincrement())
-  number          String
-  city            String
-  address         String
-  zipCode         String
-  gardenStyle     String
-  maxPrice        String
-  startDate       DateTime
-  userId          String @unique 
-
-
-  user           User   @relation(fields: [userId], references: [id])
-  files          Requestfile[]
+  id          Int      @id @default(autoincrement())
+  serviceType String
+  gardenStyle String
+  budget      String
+  deadline    String
+  addons      String   // Stored as comma-separated string or JSON string
+  
+  userId      String
+  user        User     @relation(fields: [userId], references: [id])
+  
+  files       Requestfile[]
+  createdAt   DateTime @default(now())
 }
 
 model Requestfile {

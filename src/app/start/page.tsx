@@ -3,6 +3,7 @@
 import * as React from "react";
 import Image from "next/image";
 import { useEdgeStore } from "../../lib/edgestore";
+import { createRequest } from "../actions/create-request";
 
 type FormData = {
   serviceType: string;
@@ -17,6 +18,7 @@ type FormData = {
   number: string;
   zipCode: string;
   city: string;
+  password: string;
 };
 
 const gardenStyles = [
@@ -346,6 +348,18 @@ const Step6Contact = ({
       </div>
 
       <div className="flex flex-col gap-1">
+        <label className={labelClass}>Wachtwoord *</label>
+        <input
+          required
+          type="password"
+          value={formData.password}
+          onChange={(e) => onChange("password", e.target.value)}
+          className={inputClass}
+          placeholder="Minimaal 6 tekens"
+        />
+      </div>
+
+      <div className="flex flex-col gap-1">
         <label className={labelClass}>Telefoonnummer *</label>
         <input
           required
@@ -397,6 +411,7 @@ export default function Page() {
     number: "",
     zipCode: "",
     city: "",
+    password: "",
   });
 
   const [files, setFiles] = React.useState<File[]>([]);
@@ -428,8 +443,11 @@ export default function Page() {
       }
     }
     if (currentStep === 6) {
-      if (!formData.firstName || !formData.lastName || !formData.email || !formData.number) {
+      if (!formData.firstName || !formData.lastName || !formData.email || !formData.number || !formData.password) {
         return "Vul alle verplichte velden in.";
+      }
+      if (formData.password.length < 6) {
+        return "Wachtwoord moet minimaal 6 tekens bevatten.";
       }
     }
     return null;
@@ -470,35 +488,17 @@ export default function Page() {
       const uploadResults = await Promise.all(uploadPromises);
       const uploadedUrls = uploadResults.map((r) => r.url);
 
-      const finalData = { 
-        ...formData, 
+      // 2. Save to database via Server Action
+      const result = await createRequest({
+        ...formData,
         fileUrls: uploadedUrls,
-        submittedAt: new Date().toISOString()
-      };
-
-      // 2. Upload the form data as a JSON file to EdgeStore
-      // Convert JSON to Blob
-      const jsonBlob = new Blob([JSON.stringify(finalData, null, 2)], {
-        type: "application/json",
-      });
-      // Create a File from Blob (EdgeStore expects a File)
-      const jsonFile = new File([jsonBlob], `submission-${Date.now()}.json`, {
-        type: "application/json",
       });
 
-      // Upload JSON file
-      const jsonUploadResult = await edgestore.publicFiles.upload({
-        file: jsonFile,
-        // options: { replaceTargetUrl: ... } // Removed to rely on default behavior (new file)
-      });
-
-      console.log("Submission JSON stored at:", jsonUploadResult.url);
-      console.log("Full Submission Data:", finalData);
-
-      // Simulate network request (optional, but good for UX feeling)
-      await new Promise((resolve) => setTimeout(resolve, 500));
-
-      setSuccess(true);
+      if (result.success) {
+        setSuccess(true);
+      } else {
+        setError(result.error || "Er is een fout opgetreden bij het verzenden.");
+      }
     } catch (e) {
       console.error(e);
       setError("Er is iets misgegaan. Probeer het opnieuw.");
