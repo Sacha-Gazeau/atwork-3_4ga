@@ -1,5 +1,4 @@
 import Image from "next/image";
-import "./inspiratie.css";
 
 const gardenStyles = [
   {
