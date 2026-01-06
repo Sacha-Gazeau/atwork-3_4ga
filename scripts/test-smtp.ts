@@ -39,10 +39,11 @@ const port = Number(CONTACT_SMTP_PORT) || 465;
 async function run() {
   console.log("Testing SMTP connection to", CONTACT_SMTP_HOST + ":" + port);
 
-  const transporter = nodemailer.createTransport({
-    host: CONTACT_SMTP_HOST,
-    port,
-    secure: port === 465,
+  try {
+    const transporter = nodemailer.createTransport({
+      host: CONTACT_SMTP_HOST,
+      port,
+      secure: port === 465,
       requireTLS: port === 587,
       auth:
         CONTACT_SMTP_USER && CONTACT_SMTP_PASS
@@ -53,6 +54,8 @@ async function run() {
       socketTimeout: 15000,
       logger: true,
       debug: true,
+    });
+
     await transporter.verify();
     console.log("SMTP verify: OK — server accepted connection.");
   } catch (err: any) {
@@ -62,7 +65,7 @@ async function run() {
     if (err && err.response) console.error("response:", err.response);
     if (err && err.stack) console.error(err.stack);
     process.exitCode = 2;
-  })
+  }
 }
 
 run();
