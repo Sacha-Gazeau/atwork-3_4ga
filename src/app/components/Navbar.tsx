@@ -18,7 +18,7 @@ export default function Navbar() {
             alt="logo"
             width={150}
             height={50}
-            priority 
+            priority
           />
         </Link>
 
@@ -70,34 +70,27 @@ export default function Navbar() {
             </Link>
           </li>
           <li className="navbar__item">
-            <Link href="/start" className="navbar__link" onClick={closeMenu}>
-              Start
+            <Link href="/aanpak" className="navbar__link" onClick={closeMenu}>
+              Aanpak/Proces
             </Link>
           </li>
           <li className="navbar__item">
             <Link
-              href="https://phil-co.odoo.com/shop"
+              href="/tuinstijlen"
               className="navbar__link"
-              target="_blank"
-              rel="noopener noreferrer"
               onClick={closeMenu}
             >
-              Shop
-            </Link>
-          </li>
-          <li className="navbar__item">
-            <Link href="/qa" className="navbar__link" onClick={closeMenu}>
-              QA
-            </Link>
-          </li>
-          <li className="navbar__item">
-            <Link href="/inspiratie" className="navbar__link" onClick={closeMenu}>
-              Inspiratie
+              Tuinstijlen
             </Link>
           </li>
           <li className="navbar__item">
             <Link href="/contact" className="navbar__link" onClick={closeMenu}>
               Contact
+            </Link>
+          </li>
+          <li className="navbar__item">
+            <Link href="/faq" className="navbar__link" onClick={closeMenu}>
+              FAQ
             </Link>
           </li>
         </ul>
