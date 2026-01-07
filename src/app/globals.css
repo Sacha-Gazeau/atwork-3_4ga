@@ -4,10 +4,10 @@
 
 @import "tailwindcss";
 :root {
-  --background: #efeab7;
+  --background: #e8dcc2;
   --background-item: #0b3d2e;
   --background-item-trans: lab(22.32% -20.57 4.62 / 0.1);
-  --foreground: #efeab7;
+  --foreground: #e8dcc2;
   --border-item: #e0d4b3;
   --dark: #333333;
 }
@@ -21,7 +21,7 @@
 
 @media (prefers-color-scheme: dark) {
   :root {
-    --background: #efeab7;
+    --background: #e8dcc2;
     --foreground: #000000;
   }
 }
