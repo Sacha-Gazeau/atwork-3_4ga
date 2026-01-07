@@ -5,24 +5,25 @@
 @import "tailwindcss";
 
 :root {
-  --background: #e0d4b3;
+  --background: #e8dcc2;
   --background-item: #0b3d2e;
   --background-item-trans: lab(22.32% -20.57 4.62 / 0.1);
-  --foreground: #e0d4b3;
-  --border-item: #e0d4b3;
-  --dark: #333333;
-}
-
-@theme inline {
-  --color-background: var(--background);
+  --foreground: #e8dcc2;
   --color-foreground: var(--foreground);
   --font-sans: var(--font-inter), "Odoo Unicode Support Noto", sans-serif;
   --font-mono: monospace;
 }
 
+@theme inline {
+  --color-background: var(--background);
+  /* --color-foreground: var(--foreground); This was moved to :root */
+  /* --font-sans: var(--font-inter), "Odoo Unicode Support Noto", sans-serif; This was moved to :root */
+  /* --font-mono: monospace; This was moved to :root */
+}
+
 @media (prefers-color-scheme: dark) {
   :root {
-    --background: #e0d4b3;
+    --background: #e8dcc2;
     --foreground: #000000;
   }
 }
