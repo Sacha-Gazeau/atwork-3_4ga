@@ -65,7 +65,7 @@ const Step1Contact = ({
 
   return (
     <div className="space-y-6">
-      <h2 className="text-3xl font-bold text-[var(--background-item)] text-center font-serif">Contactgegevens</h2>
+      <h2 className="text-3xl font-bold text-[var(--background-item)] text-center font-sans">Contactgegevens</h2>
       <p className="text-center text-gray-500 text-sm mb-4">Laten we beginnen met uw gegevens.</p>
 
       <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
@@ -153,7 +153,7 @@ const Step2Selection = ({
 
   return (
     <div className="space-y-6">
-      <h2 className="text-3xl font-bold text-[var(--background-item)] text-center font-serif">Waarmee kunnen we u helpen?</h2>
+      <h2 className="text-3xl font-bold text-[var(--background-item)] text-center font-sans">Waarmee kunnen we u helpen?</h2>
       <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
         {options.map((option) => (
           <button
@@ -194,7 +194,7 @@ const Step3Style = ({
 
   return (
     <div className="space-y-6">
-      <h2 className="text-3xl font-bold text-[var(--background-item)] text-center font-serif">Kies uw favoriete tuinstijl</h2>
+      <h2 className="text-3xl font-bold text-[var(--background-item)] text-center font-sans">Kies uw favoriete tuinstijl</h2>
       <p className="text-center text-gray-500 text-sm">Selecteer één of meerdere stijlen die u aanspreken.</p>
 
       <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
@@ -216,7 +216,7 @@ const Step3Style = ({
             />
             <div className={`absolute inset-0 transition-colors duration-200 ${value.includes(style.title) ? "bg-[var(--background-item)]/20" : "bg-transparent"}`} />
             <div className="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent flex items-end p-4">
-              <span className="text-white font-medium text-sm md:text-base font-serif">{style.title}</span>
+              <span className="text-white font-medium text-sm md:text-base font-sans">{style.title}</span>
             </div>
             {value.includes(style.title) && (
               <div className="absolute top-2 right-2 bg-[var(--background-item)] text-white rounded-full p-1 shadow-md z-10">
@@ -241,7 +241,7 @@ const Step4Questions = ({
 }) => {
   return (
     <div className="space-y-6">
-      <h2 className="text-3xl font-bold text-[var(--background-item)] text-center font-serif">Vertel ons iets meer</h2>
+      <h2 className="text-3xl font-bold text-[var(--background-item)] text-center font-sans">Vertel ons iets meer</h2>
 
       <div className="space-y-4">
         <div className="flex flex-col gap-2">
@@ -297,7 +297,7 @@ const Step5Addons = ({
 
   return (
     <div className="space-y-6">
-      <h2 className="text-3xl font-bold text-[var(--background-item)] text-center font-serif">Gewenste opties</h2>
+      <h2 className="text-3xl font-bold text-[var(--background-item)] text-center font-sans">Gewenste opties</h2>
       <p className="text-center text-gray-500 text-sm">Heeft u interesse in een van de volgende opties?</p>
 
       <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
@@ -350,7 +350,7 @@ const Step6Upload = ({
 
   return (
     <div className="space-y-6">
-      <h2 className="text-3xl font-bold text-[var(--background-item)] text-center font-serif">Documenten delen</h2>
+      <h2 className="text-3xl font-bold text-[var(--background-item)] text-center font-sans">Documenten delen</h2>
       <p className="text-center text-gray-500 text-sm">Upload minimaal 5 foto&apos;s van uw tuin</p>
 
       <div className="border-2 border-dashed border-gray-300 rounded-xl p-8 text-center hover:bg-gray-50 transition-colors relative group">
@@ -511,7 +511,7 @@ export default function Page() {
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M5 13l4 4L19 7" />
             </svg>
           </div>
-          <h2 className="text-3xl font-bold text-[var(--background-item)] font-serif">Bedankt!</h2>
+          <h2 className="text-3xl font-bold text-[var(--background-item)] font-sans">Bedankt!</h2>
           <p className="text-gray-600 text-lg">
             We hebben uw aanvraag goed ontvangen. We nemen binnen 24 uur contact met u op.
           </p>
