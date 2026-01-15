@@ -58,6 +58,20 @@ export default function Home() {
           </div>
         </div>
       </section>
+
+      {/* CTA Section */}
+      <section className="cta">
+        <div className="cta__content">
+          <h2 className="cta__title">Klaar voor uw Droomtuin?</h2>
+          <p className="cta__text">
+            Begin vandaag nog met het ontwerpen van uw eigen tuin.
+            Professioneel, betaalbaar en eenvoudig.
+          </p>
+          <Link href="/contact" className="cta__button">
+            Start Nu Uw Project
+          </Link>
+        </div>
+      </section>
     </div>
   );
 }

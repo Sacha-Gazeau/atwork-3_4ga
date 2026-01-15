@@ -186,3 +186,50 @@
   outline: 3px solid var(--foreground);
   outline-offset: 4px;
 }
+
+/* CTA Section */
+.cta {
+  background-image: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url('/Rectangle 2.png');
+  background-size: cover;
+  background-position: center;
+  background-attachment: fixed;
+  padding: 8rem 1.5rem;
+  text-align: center;
+  color: white;
+}
+
+.cta__content {
+  max-width: 700px;
+  margin: 0 auto;
+}
+
+.cta__title {
+  font-size: clamp(2.5rem, 5vw, 3.5rem);
+  font-weight: 800;
+  margin-bottom: 1.5rem;
+  line-height: 1.2;
+}
+
+.cta__text {
+  font-size: 1.25rem;
+  margin-bottom: 2.5rem;
+  opacity: 0.9;
+  line-height: 1.6;
+}
+
+.cta__button {
+  background-color: var(--background);
+  color: var(--background-item);
+  font-weight: 700;
+  padding: 1rem 2.5rem;
+  border-radius: 50px;
+  font-size: 1.1rem;
+  text-decoration: none;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  display: inline-block;
+}
+
+.cta__button:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+}
