@@ -205,6 +205,13 @@ footer.footer {
     transform: scaleX(1);
     transform-origin: left;
   }
+
+  .navbar__link--external {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.25rem;
+  }
 }
 
 .footer {
