@@ -71,7 +71,7 @@ export default function Navbar() {
           </li>
           <li className="navbar__item">
             <Link href="/aanpak" className="navbar__link" onClick={closeMenu}>
-              Aanpak/Proces
+              Aanpak
             </Link>
           </li>
           <li className="navbar__item">
@@ -93,6 +93,18 @@ export default function Navbar() {
               FAQ
             </Link>
           </li>
+          <li className="navbar__item">
+            <Link
+              href="https://phil-co.odoo.com/shop"
+              className="navbar__link"
+              onClick={closeMenu}
+              target="_blank"
+            >
+              Shop
+            </Link>
+          </li>
+
+
         </ul>
       </div>
     </nav>

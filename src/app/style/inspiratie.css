@@ -52,7 +52,7 @@
 }
 
 .style-card__title {
-  font-family: "Playfair Display", serif;
+  font-family: "Inter", "Odoo Unicode Support Noto", sans-serif;
   font-size: 1.5rem;
   color: var(--background);
   margin-bottom: 0.75rem;

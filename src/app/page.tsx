@@ -24,7 +24,7 @@ export default function Home() {
             Voor gezinnen met een beperkt budget die hun tuin willen
             transformeren
           </p>
-          <Link href="/inspiratie" className="hero__button">
+          <Link href="/tuinstijlen" className="hero__button">
             Kies uw tuinstijl
           </Link>
         </div>
@@ -32,18 +32,31 @@ export default function Home() {
 
       {/* About Section */}
       <section className="about">
-        <h2 className="about__title">Wat Doet DIYTuinen?</h2>
-        <p className="about__text">
-          DIY Tuinen helpt gezinnen met een beperkt budget om toch hun droomtuin
-          te realiseren.Wij geloven dat iedereen recht heeft op een prachtige
-          tuin, ongeacht het budget.
-        </p>
-        <p className="about__text">
-          Met onze innovatieve do-it-yourself pakketten kunt u zelf, stap voor
-          stap, uw tuin aanleggen op het moment dat u het beste uitkomt. Van
-          ontwerp tot uitvoering, wij begeleiden u door het hele proces met
-          duidelijke instructies en hoogwaardige materialen.
-        </p>
+        <div className="about__container">
+          <div className="about__content">
+            <h2 className="about__title">Wat Doet DIYTuinen?</h2>
+            <p className="about__text">
+              DIY Tuinen helpt gezinnen met een beperkt budget om toch hun droomtuin
+              te realiseren. Wij geloven dat iedereen recht heeft op een prachtige
+              tuin, ongeacht het budget.
+            </p>
+            <p className="about__text">
+              Met onze innovatieve do-it-yourself pakketten kunt u zelf, stap voor
+              stap, uw tuin aanleggen op het moment dat u het beste uitkomt. Van
+              ontwerp tot uitvoering, wij begeleiden u door het hele proces met
+              duidelijke instructies en hoogwaardige materialen.
+            </p>
+          </div>
+          <div className="about__image-wrapper">
+            <Image
+              src="/dream_garden_about.png"
+              alt="Prachtige droomtuin met bloemen en zitgedeelte"
+              width={600}
+              height={400}
+              className="about__image"
+            />
+          </div>
+        </div>
       </section>
     </div>
   );
