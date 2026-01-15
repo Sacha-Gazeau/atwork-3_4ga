@@ -3,6 +3,7 @@
 import { z } from "zod";
 import * as bcrypt from "bcryptjs";
 import { prisma } from "@/lib/client";
+import { transporter } from "@/lib/mail";
 
 const RequestSchema = z.object({
   serviceType: z.string(),
@@ -52,7 +53,10 @@ export async function createRequest(data: z.infer<typeof RequestSchema>) {
     });
 
     if (existingUser) {
-      return { success: false, error: "Er bestaat al een account met dit e-mailadres." };
+      return {
+        success: false,
+        error: "Er bestaat al een account met dit e-mailadres.",
+      };
     }
 
     // 2. Hash password
@@ -88,10 +92,42 @@ export async function createRequest(data: z.infer<typeof RequestSchema>) {
         },
       },
     });
+    await transporter.sendMail({
+      from: `"Garden Service" <${process.env.CONTACT_FROM_EMAIL}>`,
+      to: email,
+      bcc: process.env.CONTACT_TO_EMAIL,
+      subject: "Bevestiging van uw aanvraag",
+      html: `
+    <h2>Nieuwe aanvraag</h2>
 
+    <p><strong>Naam:</strong> ${firstName} ${lastName}</p>
+    <p><strong>Email:</strong> ${email}</p>
+    <p><strong>Telefoon:</strong> ${number}</p>
+
+    <p><strong>Service:</strong> ${serviceType}</p>
+    <p><strong>Stijl:</strong> ${gardenStyle.join(", ")}</p>
+    <p><strong>Deadline:</strong> ${deadline}</p>
+    <p><strong>Budget:</strong> ${budget}</p>
+    <p><strong>Addons:</strong> ${addons.join(", ")}</p>
+
+    <h3>Afbeeldingen</h3>
+    <ul>
+      ${
+        fileUrls && fileUrls.length > 0
+          ? fileUrls
+              .map((url) => `<li><a href="${url}">${url}</a></li>`)
+              .join("")
+          : "<li>Aucune image</li>"
+      }
+    </ul>
+  `,
+    });
     return { success: true, requestId: newRequest.id };
   } catch (error) {
     console.error("Error creating request:", error);
-    return { success: false, error: `Er is iets misgegaan: ${(error as Error).message}` };
+    return {
+      success: false,
+      error: `Er is iets misgegaan: ${(error as Error).message}`,
+    };
   }
 }
