@@ -11,7 +11,7 @@
   "dependencies": {
     "@edgestore/react": "^0.5.4",
     "@edgestore/server": "^0.5.4",
-    "@prisma/client": "5.19.1",
+    "@prisma/client": "^5.19.1",
     "bcryptjs": "^3.0.3",
     "next": "15.5.9",
     "nodemailer": "^7.0.12",
@@ -29,7 +29,7 @@
     "@types/react-dom": "^19",
     "eslint": "^9",
     "eslint-config-next": "15.5.2",
-    "prisma": "5.19.1",
+    "prisma": "^5.19.1",
     "tailwindcss": "^4",
     "typescript": "^5"
   },
