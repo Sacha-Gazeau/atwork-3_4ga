@@ -18,7 +18,7 @@ export default function Home() {
         <div className="hero__overlay"></div>
         <div className="hero__content">
           <h1 className="hero__title">
-            Uw Droomtuin, Betaalbaar en Zelf Aangelegd
+            Uw droomtuin, betaalbaar en zelf aangelegd
           </h1>
           <p className="hero__subtitle">
             Voor gezinnen met een beperkt budget die hun tuin willen
@@ -26,7 +26,7 @@ export default function Home() {
           </p>
           <div className="hero__actions">
             <Link href="/contact" className="hero__button hero__button--primary">
-              Start Nu Uw Project
+              Start nu uw aanvraag
             </Link>
             <Link href="/tuinstijlen" className="hero__button hero__button--secondary">
               Bekijk onze tuinstijlen
