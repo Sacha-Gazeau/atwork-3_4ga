@@ -24,9 +24,14 @@ export default function Home() {
             Voor gezinnen met een beperkt budget die hun tuin willen
             transformeren
           </p>
-          <Link href="/tuinstijlen" className="hero__button">
-            Kies uw tuinstijl
-          </Link>
+          <div className="hero__actions">
+            <Link href="/contact" className="hero__button hero__button--primary">
+              Start Nu Uw Project
+            </Link>
+            <Link href="/tuinstijlen" className="hero__button hero__button--secondary">
+              Bekijk onze tuinstijlen
+            </Link>
+          </div>
         </div>
       </section>
 
@@ -56,20 +61,6 @@ export default function Home() {
               className="about__image"
             />
           </div>
-        </div>
-      </section>
-
-      {/* CTA Section */}
-      <section className="cta">
-        <div className="cta__content">
-          <h2 className="cta__title">Klaar voor uw Droomtuin?</h2>
-          <p className="cta__text">
-            Begin vandaag nog met het ontwerpen van uw eigen tuin.
-            Professioneel, betaalbaar en eenvoudig.
-          </p>
-          <Link href="/contact" className="cta__button">
-            Start Nu Uw Project
-          </Link>
         </div>
       </section>
     </div>

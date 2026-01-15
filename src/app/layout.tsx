@@ -20,7 +20,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={inter.variable} suppressHydrationWarning>
-        <header className="navbar">
+        <header>
           <Navbar />
         </header>
         <main>

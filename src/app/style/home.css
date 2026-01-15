@@ -65,11 +65,18 @@
   color: var(--background);
 }
 
+/* Hero Actions Container */
+.hero__actions {
+  display: flex;
+  gap: 1rem;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
 .hero__button {
   display: inline-block;
   text-decoration: none;
-  background-color: var(--background-item);
-  color: var(--background);
   border: none;
   padding: clamp(0.875rem, 2vw, 1rem) clamp(2rem, 4vw, 2.5rem);
   font-size: clamp(1rem, 2vw, 1.1rem);
@@ -81,6 +88,17 @@
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
   position: relative;
   overflow: hidden;
+}
+
+.hero__button--primary {
+  background-color: var(--background-item);
+  color: var(--background);
+}
+
+.hero__button--secondary {
+  background-color: var(--background);
+  color: #0b3d2e;
+  /* Hardcoded dark green for contrast against light bg */
 }
 
 .hero__button::before {
@@ -96,8 +114,15 @@
   transform: translateX(0);
 }
 
-.hero__button:hover {
+.hero__button--primary:hover {
   background-color: #0a2f25;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.4);
+}
+
+.hero__button--secondary:hover {
+  background-color: #f0ebd6;
+  /* Slightly lighter beige on hover */
   transform: translateY(-2px);
   box-shadow: 0 6px 20px rgba(0, 0, 0, 0.4);
 }
@@ -185,52 +210,4 @@
 .hero__button:focus-visible {
   outline: 3px solid var(--foreground);
   outline-offset: 4px;
-}
-
-/* CTA Section */
-.cta {
-  background-image: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url('/Rectangle 2.png');
-  background-size: cover;
-  background-position: center;
-  background-attachment: fixed;
-  padding: 8rem 1.5rem;
-  text-align: center;
-  color: var(--background);
-}
-
-.cta__content {
-  max-width: 700px;
-  margin: 0 auto;
-}
-
-.cta__title {
-  font-size: clamp(2.5rem, 5vw, 3.5rem);
-  font-weight: 800;
-  margin-bottom: 1.5rem;
-  line-height: 1.2;
-}
-
-.cta__text {
-  font-size: 1.25rem;
-  margin-bottom: 2.5rem;
-  opacity: 0.9;
-  line-height: 1.6;
-}
-
-.cta__button {
-  background-color: var(--background-item);
-  color: var(--background);
-  font-weight: 700;
-  padding: 1rem 2.5rem;
-  border-radius: 50px;
-  font-size: 1.1rem;
-  text-decoration: none;
-  transition: transform 0.2s ease, box-shadow 0.2s ease;
-  display: inline-block;
-}
-
-.cta__button:hover {
-  background-color: #0a2f25;
-  transform: translateY(-2px);
-  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.4);
 }

@@ -44,6 +44,10 @@ footer.footer {
 .navbar {
   background-color: var(--background-item);
   color: var(--background);
+  width: 100%;
+}
+
+.navbar__container {
   padding: 0.5rem 1rem;
   display: block;
 }
@@ -120,16 +124,27 @@ footer.footer {
 }
 
 @media (min-width: 769px) {
-  .navbar {
-    display: flex;
-    flex-direction: column;
+  .navbar__container {
+    display: grid;
+    grid-template-columns: 1fr auto 1fr;
     align-items: center;
-    gap: 0.25rem;
+    gap: 1rem;
+    max-width: 1200px;
+    padding: 1rem;
+    margin: 0 auto;
+    width: 100%;
   }
 
   .navbar__header {
-    justify-content: center;
+    justify-content: flex-start;
     width: auto;
+    grid-column: 1;
+  }
+
+  /* Pseudo-element to balance the grid */
+  .navbar__container::after {
+    content: "";
+    grid-column: 3;
   }
 
   .navbar__toggle {
@@ -140,6 +155,9 @@ footer.footer {
     display: block;
     margin-top: 0;
     width: auto;
+    grid-column: 2;
+    justify-self: center;
+    /* Ensure menu stays in center */
   }
 
   .navbar__list {
@@ -152,6 +170,40 @@ footer.footer {
   .navbar__link {
     font-size: 1.3rem;
     padding: 1rem;
+    position: relative;
+    /* Needed for absolute positioning of pseudo-element */
+  }
+
+  /* Animated Underline */
+  .navbar__link::after {
+    content: "";
+    position: absolute;
+    bottom: 0.5rem;
+    left: 0;
+    width: 100%;
+    height: 2px;
+    background-color: currentColor;
+    transform: scaleX(0);
+    transform-origin: right;
+    transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  /* 1. Active is visible by default */
+  .navbar__link--active::after {
+    transform: scaleX(1);
+    transform-origin: left;
+  }
+
+  /* 2. When hovering the list, hide the active link (prepare to switch focus) */
+  .navbar__list:hover .navbar__link--active::after {
+    transform: scaleX(0);
+    transform-origin: right;
+  }
+
+  /* 3. But ALWAYS show the link currently being hovered (overrides Rule 2) */
+  .navbar__list .navbar__link:hover::after {
+    transform: scaleX(1);
+    transform-origin: left;
   }
 }
 
