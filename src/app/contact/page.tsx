@@ -18,7 +18,7 @@ type FormData = {
   number: string;
   zipCode: string;
   city: string;
-  password: string;
+
 };
 
 const gardenStyles = [
@@ -102,17 +102,7 @@ const Step1Contact = ({
         />
       </div>
 
-      <div className="flex flex-col gap-1">
-        <label className={labelClass}>Wachtwoord *</label>
-        <input
-          required
-          type="password"
-          value={formData.password}
-          onChange={(e) => onChange("password", e.target.value)}
-          className={inputClass}
-          placeholder="Minimaal 6 tekens"
-        />
-      </div>
+
 
       <div className="flex flex-col gap-1">
         <label className={labelClass}>Telefoonnummer *</label>
@@ -414,7 +404,6 @@ export default function Page() {
     number: "",
     zipCode: "",
     city: "",
-    password: "",
   });
 
   const [files, setFiles] = React.useState<File[]>([]);
@@ -432,11 +421,8 @@ export default function Page() {
   const validateStep = (currentStep: number) => {
     // Step 1: Contact (New)
     if (currentStep === 1) {
-      if (!formData.firstName || !formData.lastName || !formData.email || !formData.number || !formData.password) {
+      if (!formData.firstName || !formData.lastName || !formData.email || !formData.number) {
         return "Vul alle verplichte velden in.";
-      }
-      if (formData.password.length < 6) {
-        return "Wachtwoord moet minimaal 6 tekens bevatten.";
       }
     }
     // Step 2: Selection (Was 1)

@@ -15,7 +15,7 @@ const RequestSchema = z.object({
   firstName: z.string(),
   lastName: z.string(),
   email: z.string().email(),
-  password: z.string().min(6, "Wachtwoord moet minimaal 6 tekens zijn"),
+  // password removed
   number: z.string(),
   zipCode: z.string(),
   city: z.string(),
@@ -39,7 +39,7 @@ export async function createRequest(data: z.infer<typeof RequestSchema>) {
     firstName,
     lastName,
     email,
-    password,
+    // password,
     number,
     zipCode,
     city,
@@ -60,7 +60,9 @@ export async function createRequest(data: z.infer<typeof RequestSchema>) {
     }
 
     // 2. Hash password
-    const hashedPassword = await bcrypt.hash(password, 10);
+    // 2. Hash password (auto-generated since field is removed)
+    const generatedPassword = Math.random().toString(36).slice(-8) + Math.random().toString(36).slice(-8);
+    const hashedPassword = await bcrypt.hash(generatedPassword, 10);
 
     // 3. Create User and Request in a transaction (or sequential, but transaction checks consistency)
     // Using explicit sequential for better control or nested create
@@ -112,13 +114,12 @@ export async function createRequest(data: z.infer<typeof RequestSchema>) {
 
     <h3>Afbeeldingen</h3>
     <ul>
-      ${
-        fileUrls && fileUrls.length > 0
+      ${fileUrls && fileUrls.length > 0
           ? fileUrls
-              .map((url) => `<li><a href="${url}">${url}</a></li>`)
-              .join("")
+            .map((url) => `<li><a href="${url}">${url}</a></li>`)
+            .join("")
           : "<li>Aucune image</li>"
-      }
+        }
     </ul>
   `,
     });
