@@ -147,7 +147,7 @@ const Step2Selection = ({
 }: {
   value: string;
   onChange: (val: string) => void;
-  onNext: () => void;
+  onNext: (option: string) => void;
 }) => {
   const options = ["Tuinontwerp", "Tuinaanleg", "Tuinonderhoud"];
 
@@ -160,7 +160,7 @@ const Step2Selection = ({
             key={option}
             onClick={() => {
               onChange(option);
-              setTimeout(onNext, 200);
+              setTimeout(() => onNext(option), 200);
             }}
             className={`p-6 rounded-xl border-2 transition-all duration-200 text-lg font-medium h-32 flex items-center justify-center hover:shadow-md 
               ${value === option
@@ -461,6 +461,12 @@ export default function Page() {
   };
 
   const handleBack = () => {
+    if (step === 6 && formData.serviceType === "Tuinonderhoud") {
+      setStep(2);
+      setError(null);
+      return;
+    }
+
     if (step > 1) {
       setStep((s) => s - 1);
       setError(null);
@@ -546,7 +552,14 @@ export default function Page() {
             <Step2Selection
               value={formData.serviceType}
               onChange={(val) => handleUpdateFormData("serviceType", val)}
-              onNext={handleNext}
+              onNext={(option) => {
+                if (option === "Tuinonderhoud") {
+                  setStep(6);
+                  setError(null);
+                } else {
+                  handleNext();
+                }
+              }}
             />
           )}
           {step === 3 && (
