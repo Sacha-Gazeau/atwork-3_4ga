@@ -24,10 +24,6 @@
   flex-direction: column;
 }
 
-.style-card:hover {
-  transform: translateY(-5px);
-  box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
-}
 
 .style-card__image-container {
   position: relative;
@@ -40,9 +36,6 @@
   transition: transform 0.5s ease;
 }
 
-.style-card:hover .style-card__image {
-  transform: scale(1.05);
-}
 
 .style-card__content {
   padding: 1.5rem;

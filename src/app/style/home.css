@@ -8,6 +8,8 @@
   height: 90vh;
   overflow: hidden;
   isolation: isolate;
+  border: clamp(1rem, 2vw, 2rem) solid #e0d4b3;
+  box-sizing: border-box;
 }
 
 .hero__background {
@@ -144,6 +146,45 @@
   height: auto;
   display: block;
   object-fit: cover;
+}
+
+@media (max-width: 768px) {
+  .hero {
+    height: auto;
+    min-height: 90vh;
+  }
+
+  .hero__content {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding: 2rem 1.5rem;
+  }
+
+  .hero__text {
+    max-width: 100%;
+    margin-bottom: 2rem;
+    margin-top: 2rem;
+  }
+
+  .hero__title {
+    font-size: clamp(3.5rem, 14vw, 5rem);
+    line-height: 1;
+  }
+
+  .hero__subtitle {
+    margin-top: 1.5rem;
+    font-size: 1rem;
+    padding-top: 1.5rem;
+    max-width: 100%;
+  }
+
+  .hero__actions {
+    width: 100%;
+    justify-content: center;
+    margin-top: auto;
+    padding-bottom: 2rem;
+  }
 }
 
 .about__title {
