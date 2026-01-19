@@ -529,7 +529,6 @@ export default function Page() {
   return (
     <div className="min-h-[80vh] flex items-center justify-center py-12 px-4 sm:px-6 lg:px-8">
       <div className="max-w-3xl w-full space-y-8 bg-white p-8 rounded-2xl shadow-xl relative border border-gray-100 min-h-[600px] flex flex-col">
-        {/* Header with Progress */}
         <div className="text-center w-full">
           <ProgressBar currentStep={step} totalSteps={totalSteps} />
         </div>
@@ -589,7 +588,6 @@ export default function Page() {
           </div>
         )}
 
-        {/* Navigation Buttons */}
         <div className="flex justify-between items-center pt-6 border-t border-gray-100 mt-auto">
           <button
             onClick={handleBack}
