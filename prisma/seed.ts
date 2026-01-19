@@ -7,10 +7,11 @@ async function main() {
   await prisma.requestfile.deleteMany();
   await prisma.request.deleteMany();
   await prisma.user.deleteMany();
-  await prisma.style.deleteMany();
   await prisma.question.deleteMany();
-  await prisma.plant.deleteMany();
   await prisma.styleOnPlant.deleteMany();
+  await prisma.plant.deleteMany();
+  await prisma.style.deleteMany();
+
   await prisma.plant.createMany({
     data: [
       { id: 1, name: "Siergrassen" },
