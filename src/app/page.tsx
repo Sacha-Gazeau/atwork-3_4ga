@@ -4,7 +4,6 @@ import Link from "next/link";
 export default function Home() {
   return (
     <div className="home">
-      {/* Hero Section */}
       <section className="hero">
         <div className="hero__background">
           <Image
@@ -37,7 +36,6 @@ export default function Home() {
         </div>
       </section>
 
-      {/* About Section */}
       <section className="about">
         <div className="about__container">
           <div className="about__content">
