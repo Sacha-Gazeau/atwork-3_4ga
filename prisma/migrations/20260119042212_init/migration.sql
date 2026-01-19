@@ -35,18 +35,25 @@ CREATE TABLE "Requestfile" (
 -- CreateTable
 CREATE TABLE "Style" (
     "id" INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
-    "name" TEXT NOT NULL,
+    "title" TEXT NOT NULL,
     "description" TEXT NOT NULL,
-    "sketch" TEXT NOT NULL,
-    "features" TEXT
+    "imageUrl" TEXT
 );
 
 -- CreateTable
-CREATE TABLE "Image" (
+CREATE TABLE "Plant" (
     "id" INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
-    "filename" TEXT NOT NULL,
+    "name" TEXT NOT NULL
+);
+
+-- CreateTable
+CREATE TABLE "StyleOnPlant" (
     "styleId" INTEGER NOT NULL,
-    CONSTRAINT "Image_styleId_fkey" FOREIGN KEY ("styleId") REFERENCES "Style" ("id") ON DELETE RESTRICT ON UPDATE CASCADE
+    "plantId" INTEGER NOT NULL,
+
+    PRIMARY KEY ("styleId", "plantId"),
+    CONSTRAINT "StyleOnPlant_styleId_fkey" FOREIGN KEY ("styleId") REFERENCES "Style" ("id") ON DELETE RESTRICT ON UPDATE CASCADE,
+    CONSTRAINT "StyleOnPlant_plantId_fkey" FOREIGN KEY ("plantId") REFERENCES "Plant" ("id") ON DELETE RESTRICT ON UPDATE CASCADE
 );
 
 -- CreateTable
