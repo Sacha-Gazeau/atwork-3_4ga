@@ -17,13 +17,15 @@ export default function Home() {
         </div>
         <div className="hero__overlay"></div>
         <div className="hero__content">
-          <h1 className="hero__title">
-            Uw droomtuin, betaalbaar en zelf aangelegd
-          </h1>
-          <p className="hero__subtitle">
-            Voor gezinnen met een beperkt budget die hun tuin willen
-            transformeren
-          </p>
+          <div className="hero__text">
+            <h1 className="hero__title">
+              Uw droomtuin & betaalbaar en zelf aangelegd
+            </h1>
+            <p className="hero__subtitle">
+              Voor gezinnen met een beperkt budget die hun tuin willen
+              transformeren
+            </p>
+          </div>
           <div className="hero__actions">
             <Link href="/contact" className="hero__button hero__button--primary">
               Start nu uw aanvraag
