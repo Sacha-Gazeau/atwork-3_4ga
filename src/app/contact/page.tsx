@@ -52,7 +52,7 @@ const ProgressBar = ({ currentStep, totalSteps }: { currentStep: number; totalSt
   );
 };
 
-// STEP 1: Contact Details (Moved from Step 6)
+
 const Step1Contact = ({
   formData,
   onChange,
@@ -139,7 +139,7 @@ const Step1Contact = ({
   );
 };
 
-// STEP 2: Selection (Was Step 1)
+
 const Step2Selection = ({
   value,
   onChange,
@@ -176,7 +176,7 @@ const Step2Selection = ({
   );
 };
 
-// STEP 3: Style (Was Step 2)
+
 const Step3Style = ({
   value,
   onChange,
@@ -231,7 +231,7 @@ const Step3Style = ({
 };
 
 
-// STEP 4: Questions (Was Step 3)
+
 const Step4Questions = ({
   formData,
   onChange,
@@ -279,7 +279,7 @@ const Step4Questions = ({
   );
 };
 
-// STEP 5: Addons (Was Step 4)
+
 const Step5Addons = ({
   selectedAddons,
   onChange,
@@ -332,7 +332,7 @@ const Step5Addons = ({
   );
 };
 
-// STEP 6: Upload (Was Step 5)
+
 const Step6Upload = ({
   files,
   setFiles,
@@ -419,27 +419,21 @@ export default function Page() {
   };
 
   const validateStep = (currentStep: number) => {
-    // Step 1: Contact (New)
     if (currentStep === 1) {
       if (!formData.firstName || !formData.lastName || !formData.email || !formData.number) {
         return "Vul alle verplichte velden in.";
       }
     }
-    // Step 2: Selection (Was 1)
     if (currentStep === 2) {
       if (!formData.serviceType) return "Maak een keuze om verder te gaan.";
     }
-    // Step 3: Style (Was 2)
     if (currentStep === 3) {
       if (formData.gardenStyle.length === 0) return "Selecteer minimaal één tuinstijl die u aanspreekt.";
     }
-    // Step 4: Questions (Was 3)
     if (currentStep === 4) {
       if (!formData.deadline) return "Selecteer een deadline.";
       if (!formData.budget) return "Selecteer een budget.";
     }
-    // Step 5: Addons (Was 4) - Optional
-    // Step 6: Upload (Was 5)
     if (currentStep === 6) {
       if (files.length < 5) {
         return `U moet minimaal 5 afbeeldingen uploaden (huidig: ${files.length}).`;
@@ -535,12 +529,10 @@ export default function Page() {
   return (
     <div className="min-h-[80vh] flex items-center justify-center py-12 px-4 sm:px-6 lg:px-8">
       <div className="max-w-3xl w-full space-y-8 bg-white p-8 rounded-2xl shadow-xl relative border border-gray-100 min-h-[600px] flex flex-col">
-        {/* Header with Progress */}
         <div className="text-center w-full">
           <ProgressBar currentStep={step} totalSteps={totalSteps} />
         </div>
 
-        {/* Steps */}
         <div className="flex-grow py-4">
           {step === 1 && (
             <Step1Contact
@@ -589,14 +581,13 @@ export default function Page() {
           )}
         </div>
 
-        {/* Error Message */}
+
         {error && (
           <div className="bg-red-50 text-red-600 p-3 rounded-lg text-sm font-medium text-center border border-red-200">
             {error}
           </div>
         )}
 
-        {/* Navigation Buttons */}
         <div className="flex justify-between items-center pt-6 border-t border-gray-100 mt-auto">
           <button
             onClick={handleBack}
