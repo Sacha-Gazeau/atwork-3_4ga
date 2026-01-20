@@ -4,9 +4,6 @@ import { PrismaClient } from "../src/app/_generated/prisma/index.js";
 const prisma = new PrismaClient();
 
 async function main() {
-  await prisma.requestfile.deleteMany();
-  await prisma.request.deleteMany();
-  await prisma.user.deleteMany();
   await prisma.question.deleteMany();
   await prisma.styleOnPlant.deleteMany();
   await prisma.plant.deleteMany();
