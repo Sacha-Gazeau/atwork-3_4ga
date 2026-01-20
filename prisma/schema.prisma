@@ -32,7 +32,7 @@ model Request {
   gardenStyle String
   budget      String
   deadline    String
-  addons      String   // Stored as comma-separated string or JSON string
+  addons      String   
   
   userId      String
   user        User     @relation(fields: [userId], references: [id])
@@ -50,24 +50,27 @@ model Requestfile {
 
 
 model Style {
-  id            Int       @id @default(autoincrement())
-  name          String 
-  description   String
-  sketch        String
-  features      String?
-  
-  images        Image[]
+  id          Int     @id @default(autoincrement())
+  title       String
+  description String
+  imageUrl    String?
+  plants      StyleOnPlant[]
 }
 
-model Image {
-  id            Int       @id @default(autoincrement())
-  filename      String 
-  styleId       Int
-
-  style         Style @relation(fields: [styleId], references: [id])
+model Plant {
+  id     Int     @id @default(autoincrement())
+  name   String
+  styles StyleOnPlant[]
 }
 
+model StyleOnPlant {
+  style   Style @relation(fields: [styleId], references: [id])
+  styleId Int
+  plant   Plant @relation(fields: [plantId], references: [id])
+  plantId Int
 
+  @@id([styleId, plantId])
+}
 
 model Question {
   id            Int       @id @default(autoincrement())
