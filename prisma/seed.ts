@@ -4,9 +4,6 @@ import { PrismaClient } from "../src/app/_generated/prisma/index.js";
 const prisma = new PrismaClient();
 
 async function main() {
-  await prisma.requestfile.deleteMany();
-  await prisma.request.deleteMany();
-  await prisma.user.deleteMany();
   await prisma.question.deleteMany();
   await prisma.styleOnPlant.deleteMany();
   await prisma.plant.deleteMany();
@@ -123,45 +120,116 @@ async function main() {
   });
   await prisma.question.createMany({
     data: [
+      // 🧰 Algemene vragen
       {
-        quest: "Wat is DIY tuinen precies?",
+        theme: "🧰 Algemene vragen",
+        quest: "Wat is een DIY-tuin van Phil & co?",
         answer:
-          "DIY tuinen helpt gezinnen met een beperkter budget om toch hun droomtuin te realiseren. We maken een persoonlijk tuinontwerp en leveren een volledig DIY-pakket met planten, potgrond en afwerkingsmateriaal, zodat je zelf je tuin kan aanleggen wanneer het jou het best past.",
+          "In samenspraak met de klant ontwerpen wij een tuin naar hun behoeften, stijl en budget. Daarna kan je zelf de tuin aanleggen met duidelijke stappenplannen en praktische tips.",
       },
       {
-        quest: "Moet ik zelf nog materiaal voorzien?",
+        theme: "🧰 Algemene vragen",
+        quest: "Heb ik ervaring nodig om zelf een tuin aan te leggen?",
         answer:
-          "Ja, basisgereedschap voor tuinwerken voorzie je zelf. Denk bijvoorbeeld aan een schop, schoffel, kruiwagen, gieter en tuinhandschoenen. Indien er specifiek materiaal nodig is, vermelden we dat duidelijk in de instructies.",
+          "Ja en nee. De meeste projecten zijn geschikt voor beginners. Met goede begeleiding kan iedereen starten.",
       },
       {
-        quest: "Hoe lang is een prijsvoorstel geldig?",
+        theme: "🧰 Algemene vragen",
+        quest: "Wat kost het om een DIY-tuin te maken?",
         answer:
-          "Het prijsvoorstel voor het ontwerp van je tuin is 30 dagen geldig vanaf de datum waarop je het ontvangt. Na deze periode kan de prijs opnieuw berekend worden, bijvoorbeeld door gewijzigde materiaal- of plantprijzen.",
+          "De kosten hangen af van de grootte van de tuin, de materialen en de gekozen stijl. Veel projecten zijn budgetvriendelijk.",
+      },
+
+      // 🌱 Ontwerp & Planning
+      {
+        theme: "🌱 Ontwerp & Planning",
+        quest: "Hoe begin ik met het ontwerpen van mijn tuin?",
+        answer:
+          "Start met een schets, bepaal de functies en bespreek dit met onze tuinarchitect die rekening houdt met budget, bodem en licht.",
       },
       {
-        quest: "Wat als ik geen plan van mijn tuin heb?",
+        theme: "🌱 Ontwerp & Planning",
+        quest: "Bieden jullie voorbeeldontwerpen of templates?",
         answer:
-          "Geen probleem. Als je geen duidelijk tuinplan hebt, kan DIY tuinen de tuin komen opmeten tegen een meerprijs. De kost hiervoor is afhankelijk van de gemeente waarin je woont. Tijdens de aanvraag kan je aangeven dat je een opmeting wenst.",
+          "Ja, op de website vind je voorbeelden en 3D-plannen. Een combinatie van stijlen is mogelijk.",
       },
       {
-        quest: "Kan ik het ontwerp nog laten aanpassen?",
+        theme: "🌱 Ontwerp & Planning",
+        quest: "Hoe weet ik welke planten geschikt zijn voor mijn tuin?",
         answer:
-          "Ja. Nadat je het eerste ontwerp ontvangen hebt, heb je 7 dagen de tijd om wijzigingen of opmerkingen door te sturen via e-mail. We verwerken die feedback in een finaal ontwerp.",
+          "In samenspraak met de tuinarchitect wordt een beplantingsplan opgesteld op basis van zon, bodem en onderhoud.",
+      },
+
+      // 🛠️ Materialen & Gereedschap
+      {
+        theme: "🛠️ Materialen & Gereedschap",
+        quest: "Welke basisgereedschappen heb ik nodig?",
+        answer:
+          "Spade, schop, hark, snoeischaar, waterpas, meetlint en kruiwagen. Voor grote werken kan je materiaal huren.",
       },
       {
-        quest: "Wanneer moet ik betalen?",
+        theme: "🛠️ Materialen & Gereedschap",
+        quest: "Waar kan ik materialen kopen?",
         answer:
-          "Je betaalt eerst een voorschot voor het tuinontwerp, zoals beschreven in de e-mail met het prijsvoorstel. Na de goedkeuring van het finale ontwerp en de gedetailleerde prijs volgt een tweede voorschot voor de aanleg en het DIY-pakket. De exacte betalingsmomenten en bedragen communiceren we altijd duidelijk op voorhand.",
+          "Phil & co levert naast ontwerp en begeleiding ook de nodige planten en materialen.",
       },
       {
-        quest: "Kan ik zelf planten of materialen toevoegen?",
+        theme: "🛠️ Materialen & Gereedschap",
+        quest: "Zijn de materialen duurzaam?",
         answer:
-          "Ja, dat kan. Tijdens je aanvraag kan je in het vak ‘Opmerkingen’ aangeven welke planten of materialen je graag zou behouden of zelf wil voorzien. We houden daar zoveel mogelijk rekening mee bij het ontwerp en de prijsberekening.",
+          "Wij kiezen voor kwaliteitsvolle en duurzame materialen binnen het budget van de klant.",
+      },
+
+      // 🌼 Aanleg & Uitvoering
+      {
+        theme: "🌼 Aanleg & Uitvoering",
+        quest: "Hoe lang duurt het om een DIY-project af te werken?",
+        answer:
+          "Een eenvoudige tuin duurt enkele dagen, grotere projecten kunnen weken duren.",
       },
       {
-        quest: "Hoe neem ik contact op als ik nog vragen heb?",
+        theme: "🌼 Aanleg & Uitvoering",
+        quest: "Kan ik stap-voor-stap instructies volgen?",
         answer:
-          "Je kan ons altijd bereiken via het contactformulier op de website, per e-mail of telefonisch. Alle gegevens vind je terug op de contactpagina. We helpen je graag verder met al je vragen over jouw toekomstige droomtuin.",
+          "Ja, elk project bevat duidelijke stappen, foto’s en tips. Extra begeleiding is mogelijk.",
+      },
+      {
+        theme: "🌼 Aanleg & Uitvoering",
+        quest: "Wat als ik een fout maak tijdens de aanleg?",
+        answer:
+          "De meeste fouten zijn eenvoudig te herstellen met hulp van onze specialisten.",
+      },
+
+      // 💧 Onderhoud
+      {
+        theme: "💧 Onderhoud",
+        quest: "Hoe onderhoud ik mijn DIY-tuin?",
+        answer:
+          "Water geven, snoeien, bemesten en onkruid verwijderen. Seizoenschecklists zijn beschikbaar.",
+      },
+      {
+        theme: "💧 Onderhoud",
+        quest: "Zijn DIY-tuinen onderhoudsarm?",
+        answer:
+          "Ja, wij ontwerpen tuinen met vaste planten en duurzame materialen om onderhoud te beperken.",
+      },
+
+      // 📦 Bestellingen & Service
+      {
+        theme: "📦 Bestellingen & Service",
+        quest: "Hoe krijgen wij de materialen bij ons?",
+        answer: "Materialen worden op afspraak geleverd op de gewenste dag.",
+      },
+      {
+        theme: "📦 Bestellingen & Service",
+        quest: "Hoe lang is de levertijd?",
+        answer:
+          "Meestal 2 tot 5 werkdagen, afhankelijk van voorraad en transport.",
+      },
+      {
+        theme: "📦 Bestellingen & Service",
+        quest: "Bieden jullie ondersteuning na aankoop?",
+        answer: "Ja, via e-mail, chat of video-call voor verdere begeleiding.",
       },
     ],
   });

@@ -11,43 +11,6 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-model User {
-  id        String      @id @default(cuid())
-  firstName String
-  lastName  String
-  email     String    @unique
-  phoneNumber String
-  zipCode     String
-  city        String
-  hashedPassword  String
-
-  role          String @default("CLIENT")
-  requests      Request[]
-}
-
-
-model Request {
-  id          Int      @id @default(autoincrement())
-  serviceType String
-  gardenStyle String
-  budget      String
-  deadline    String
-  addons      String   
-  
-  userId      String
-  user        User     @relation(fields: [userId], references: [id])
-  
-  files       Requestfile[]
-  createdAt   DateTime @default(now())
-}
-
-model Requestfile {
-  id        Int   @id @default(autoincrement())
-  url       String 
-  request   Request  @relation(fields: [requestId], references: [id])
-  requestId Int
-}
-
 
 model Style {
   id          Int     @id @default(autoincrement())
@@ -74,6 +37,7 @@ model StyleOnPlant {
 
 model Question {
   id            Int       @id @default(autoincrement())
+  theme         String
   quest         String 
   answer        String 
 }
