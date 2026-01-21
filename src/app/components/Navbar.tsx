@@ -101,7 +101,7 @@ export default function Navbar() {
             </li>
             <li className="navbar__item">
               <Link
-                href="/contact"
+                href="/aanvraag"
                 className={`navbar__link ${isActive("/contact") ? "navbar__link--active" : ""
                   }`}
                 onClick={closeMenu}

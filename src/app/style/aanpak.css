@@ -1,0 +1,117 @@
+.aanpak {
+  padding: 3rem 1rem;
+  max-width: 900px;
+  margin: 0 auto;
+}
+
+.aanpak-title {
+  text-align: center;
+  margin-bottom: 3rem;
+}
+
+/* Step layout as cards */
+.aanpak-step {
+  display: flex;
+  align-items: stretch; /* chiffre prend toute la hauteur */
+  justify-content: space-between;
+  margin-bottom: 2rem;
+  gap: 2rem;
+  padding: 0;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  transition:
+    opacity 0.6s ease,
+    transform 0.6s ease,
+    box-shadow 0.3s ease;
+  opacity: 0;
+  transform: translateY(40px);
+}
+
+/* Number block */
+.aanpak-number {
+  font-size: 4rem;
+  font-weight: bold;
+  flex: 1; /* prend toute la hauteur */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 12px;
+  background-color: var(--background-item);
+  color: var(--background);
+  padding: 0;
+}
+
+/* Text block */
+.aanpak-text {
+  flex: 2;
+  padding: 2rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.aanpak-text h3 {
+  margin-bottom: 0.5rem;
+}
+
+/* Alternate step (chiffre à droite) */
+.aanpak-step.reverse {
+  flex-direction: row-reverse;
+}
+
+.aanpak-step.reverse .aanpak-number {
+  background-color: var(--background-item);
+  color: var(--background);
+  padding: 1.4rem 0rem  ;
+}
+
+.aanpak-step.reverse .aanpak-text {
+  color: var(--background-item);
+  text-align: left;
+}
+
+/* Visible animation */
+.aanpak-step.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.aanpak-step:hover {
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+}
+
+/* Tablet */
+@media (max-width: 900px) {
+  .aanpak-step {
+    flex-direction: column;
+    gap: 1.5rem;
+  }
+
+  .aanpak-number,
+  .aanpak-text {
+    flex: unset;
+    width: 100%;
+  }
+
+  .aanpak-number {
+    font-size: 3.5rem;
+    padding: 2rem 0;
+  }
+
+  .aanpak-text {
+    padding: 1.5rem 0;
+    text-align: center;
+  }
+}
+
+/* Mobile */
+@media (max-width: 600px) {
+  .aanpak-number {
+    font-size: 3rem;
+  }
+
+  .aanpak-text {
+    padding: 1rem 0;
+    text-align: center;
+  }
+}
