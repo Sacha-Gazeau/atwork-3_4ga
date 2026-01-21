@@ -11,6 +11,36 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
+model Request {
+  id           Int      @id @default(autoincrement())
+
+  firstName    String
+  lastName     String
+  email        String
+  phoneNumber String
+  zipCode      String
+  city         String
+
+  serviceType  String
+  gardenStyle  String
+  deadline     String
+  budget       String
+  addons       String
+
+  files        File[]
+
+  createdAt    DateTime @default(now())
+}
+
+model File {
+  id        Int      @id @default(autoincrement())
+  url       String
+  requestId Int
+
+  request   Request @relation(fields: [requestId], references: [id], onDelete: Cascade)
+
+  createdAt DateTime @default(now())
+}
 
 model Style {
   id          Int     @id @default(autoincrement())

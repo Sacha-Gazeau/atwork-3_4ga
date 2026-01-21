@@ -1,7 +1,6 @@
 "use server";
 
 import { z } from "zod";
-import * as bcrypt from "bcryptjs";
 import { prisma } from "@/lib/client";
 import { transporter } from "@/lib/mail";
 
@@ -15,7 +14,6 @@ const RequestSchema = z.object({
   firstName: z.string(),
   lastName: z.string(),
   email: z.string().email(),
-  // password removed
   number: z.string(),
   zipCode: z.string(),
   city: z.string(),
@@ -39,7 +37,6 @@ export async function createRequest(data: z.infer<typeof RequestSchema>) {
     firstName,
     lastName,
     email,
-    // password,
     number,
     zipCode,
     city,
@@ -47,46 +44,19 @@ export async function createRequest(data: z.infer<typeof RequestSchema>) {
   } = result.data;
 
   try {
-    // 1. Check if user already exists
-    const existingUser = await prisma.user.findUnique({
-      where: { email },
-    });
-
-    if (existingUser) {
-      return {
-        success: false,
-        error: "Er bestaat al een account met dit e-mailadres.",
-      };
-    }
-
-    // 2. Hash password
-    // 2. Hash password (auto-generated since field is removed)
-    const generatedPassword = Math.random().toString(36).slice(-8) + Math.random().toString(36).slice(-8);
-    const hashedPassword = await bcrypt.hash(generatedPassword, 10);
-
-    // 3. Create User and Request in a transaction (or sequential, but transaction checks consistency)
-    // Using explicit sequential for better control or nested create
-    const user = await prisma.user.create({
+    const newRequest = await prisma.request.create({
       data: {
         firstName,
         lastName,
         email,
-        hashedPassword: hashedPassword,
         phoneNumber: number,
         zipCode,
         city,
-      },
-    });
-
-    // 4. Create Request linked to User
-    const newRequest = await prisma.request.create({
-      data: {
         serviceType,
         gardenStyle: gardenStyle.join(", "),
         deadline,
         budget,
         addons: addons.join(", "),
-        userId: user.id,
         files: {
           create: fileUrls?.map((url) => ({
             url,
@@ -114,12 +84,13 @@ export async function createRequest(data: z.infer<typeof RequestSchema>) {
 
     <h3>Afbeeldingen</h3>
     <ul>
-      ${fileUrls && fileUrls.length > 0
+      ${
+        fileUrls && fileUrls.length > 0
           ? fileUrls
-            .map((url) => `<li><a href="${url}">${url}</a></li>`)
-            .join("")
+              .map((url) => `<li><a href="${url}">${url}</a></li>`)
+              .join("")
           : "<li>Aucune image</li>"
-        }
+      }
     </ul>
   `,
     });
