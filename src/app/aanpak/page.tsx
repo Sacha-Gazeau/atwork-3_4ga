@@ -2,6 +2,7 @@
 
 import { useEffect } from "react";
 
+
 export default function Aanpak() {
   const steps = [
     {
@@ -50,9 +51,8 @@ export default function Aanpak() {
       {steps.map((step, index) => (
         <div
           key={index}
-          className={`aanpak-step ${
-            index % 2 === 0 ? "normal" : "alternate"
-          } ${index % 2 !== 0 ? "reverse" : ""}`}
+          className={`aanpak-step ${index % 2 === 0 ? "normal" : "alternate"
+            } ${index % 2 !== 0 ? "reverse" : ""}`}
         >
           <div className="aanpak-text">
             <h3>{step.title}</h3>

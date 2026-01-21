@@ -1,5 +1,10 @@
 import Image from "next/image";
 import prisma from "@/lib/client";
+import { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "Tuinstijlen",
+};
 
 export default async function Inspiration() {
   const gardenStyles = await prisma.style.findMany({
