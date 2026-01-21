@@ -75,6 +75,16 @@ jobs:
         run: ${{ steps.detect-package-manager.outputs.manager }} ${{ steps.detect-package-manager.outputs.command }}
       - name: Build with Next.js
         run: ${{ steps.detect-package-manager.outputs.runner }} next build
+        env:
+          EDGE_STORE_ACCESS_KEY: ${{ secrets.EDGE_STORE_ACCESS_KEY }}
+          EDGE_STORE_SECRET_KEY: ${{ secrets.EDGE_STORE_SECRET_KEY }}
+
+          CONTACT_SMTP_HOST: ${{ secrets.CONTACT_SMTP_HOST }}
+          CONTACT_SMTP_PORT: ${{ secrets.CONTACT_SMTP_PORT }}
+          CONTACT_SMTP_USER: ${{ secrets.CONTACT_SMTP_USER }}
+          CONTACT_SMTP_PASS: ${{ secrets.CONTACT_SMTP_PASS }}
+          CONTACT_FROM_EMAIL: ${{ secrets.CONTACT_FROM_EMAIL }}
+          CONTACT_TO_EMAIL: ${{ secrets.CONTACT_TO_EMAIL }}
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
