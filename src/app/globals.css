@@ -4,20 +4,24 @@
 @import url("./style/footer.css");
 
 @import "tailwindcss";
+
 :root {
   --background: #e8dcc2;
   --background-item: #0b3d2e;
   --background-item-trans: lab(22.32% -20.57 4.62 / 0.1);
   --foreground: #e8dcc2;
+  --color-foreground: var(--foreground);
+  --font-sans: var(--font-inter), "Odoo Unicode Support Noto", sans-serif;
+  --font-mono: monospace;
   --border-item: #e0d4b3;
   --dark: #333333;
 }
 
 @theme inline {
   --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  /* --color-foreground: var(--foreground); This was moved to :root */
+  /* --font-sans: var(--font-inter), "Odoo Unicode Support Noto", sans-serif; This was moved to :root */
+  /* --font-mono: monospace; This was moved to :root */
 }
 
 @media (prefers-color-scheme: dark) {
@@ -30,9 +34,7 @@
 body {
   background: var(--background);
   color: var(--foreground);
-  font-family:
-    playfair display,
-    serif;
+  font-family: var(--font-inter), "Odoo Unicode Support Noto", sans-serif;
 }
 
 main {
@@ -46,6 +48,10 @@ footer.footer {
 .navbar {
   background-color: var(--background-item);
   color: var(--background);
+  width: 100%;
+}
+
+.navbar__container {
   padding: 0.5rem 1rem;
   display: block;
 }
@@ -114,6 +120,7 @@ footer.footer {
     opacity: 0;
     transform: translateY(-10px);
   }
+
   to {
     opacity: 1;
     transform: translateY(0);
@@ -121,16 +128,27 @@ footer.footer {
 }
 
 @media (min-width: 769px) {
-  .navbar {
-    display: flex;
-    flex-direction: column;
+  .navbar__container {
+    display: grid;
+    grid-template-columns: 1fr auto 1fr;
     align-items: center;
-    gap: 0.25rem;
+    gap: 1rem;
+    max-width: 1200px;
+    padding: 1rem;
+    margin: 0 auto;
+    width: 100%;
   }
 
   .navbar__header {
-    justify-content: center;
+    justify-content: flex-start;
     width: auto;
+    grid-column: 1;
+  }
+
+  /* Pseudo-element to balance the grid */
+  .navbar__container::after {
+    content: "";
+    grid-column: 3;
   }
 
   .navbar__toggle {
@@ -141,10 +159,14 @@ footer.footer {
     display: block;
     margin-top: 0;
     width: auto;
+    grid-column: 2;
+    justify-self: center;
+    /* Ensure menu stays in center */
   }
 
   .navbar__list {
     flex-direction: row;
+    align-items: center;
     gap: 2rem;
     padding: 0;
     border-top: none;
@@ -153,21 +175,118 @@ footer.footer {
   .navbar__link {
     font-size: 1.3rem;
     padding: 1rem;
+    position: relative;
+    /* Needed for absolute positioning of pseudo-element */
+  }
+
+  /* Animated Underline */
+  .navbar__link::after {
+    content: "";
+    position: absolute;
+    bottom: 0.5rem;
+    left: 0;
+    width: 100%;
+    height: 2px;
+    background-color: currentColor;
+    transform: scaleX(0);
+    transform-origin: right;
+    transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  /* 1. Active is visible by default */
+  .navbar__link--active::after {
+    transform: scaleX(1);
+    transform-origin: left;
+  }
+
+  /* 2. When hovering the list, hide the active link (prepare to switch focus) */
+  .navbar__list:hover .navbar__link--active::after {
+    transform: scaleX(0);
+    transform-origin: right;
+  }
+
+  /* 3. But ALWAYS show the link currently being hovered (overrides Rule 2) */
+  .navbar__list .navbar__link:hover::after {
+    transform: scaleX(1);
+    transform-origin: left;
+  }
+
+  .navbar__link--external {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.35rem;
+    border: 2px solid currentColor;
+    border-radius: 9999px;
+    padding: 0.4rem 1.25rem;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    margin-left: 0.5rem;
+  }
+
+  /* Remove underline from external link */
+  .navbar__link--external::after {
+    display: none;
+  }
+
+  /* Hover effect for external link (inverse colors) */
+  .navbar__link--external:hover {
+    background-color: #e0d4b3;
+    /* Hardcoded beige to match text */
+    color: #0b3d2e;
+    /* Hardcoded dark green */
+    border-color: #e0d4b3;
+    transform: translateY(-1px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
   }
 }
 
-.page-title {
-  background: var(--background-item);
+.footer {
+  background-color: var(--background-item);
   color: var(--background);
-  padding: 0.75rem 1.5rem;
-  border-radius: 8px;
-  font-size: 1.1rem;
-  font-weight: 600;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.75rem 1rem;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+
+.footer--contact {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.footer--contact div {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+}
+
+.footer--contact p {
+  margin: 0;
+  padding: 0;
+  font-size: 0.85rem;
+  line-height: 1.2;
+  white-space: nowrap;
+}
+
+.footer--address {
+  flex: 1;
+  margin: 0;
+  padding: 0;
+  font-size: 0.85rem;
+  line-height: 1.2;
+  text-align: right;
+}
+
+.page-title {
+  font-size: 2.4rem;
+  font-weight: 700;
+  margin: 2rem auto 2.5rem;
+  color: var(--background-item);
   text-align: center;
-  max-width: 600px;
-  margin: 2rem auto 1rem;
-  display: inline-block;
-  font-family: "Playfair Display", serif;
+  font-family: var(--font-inter), "Odoo Unicode Support Noto", sans-serif;
 }
 
 .file-upload-input {
@@ -237,6 +356,7 @@ footer.footer {
     transform: translateX(100%);
     opacity: 0;
   }
+
   to {
     transform: translateX(0);
     opacity: 1;
@@ -331,6 +451,7 @@ footer.footer {
   from {
     opacity: 0;
   }
+
   to {
     opacity: 1;
   }
@@ -431,6 +552,7 @@ footer.footer {
     justify-content: center;
   }
 }
+
 @media (max-width: 640px) {
   .request-form {
     padding: 1.5rem 1rem;

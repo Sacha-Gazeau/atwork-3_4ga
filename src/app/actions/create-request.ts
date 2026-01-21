@@ -14,6 +14,7 @@ const RequestSchema = z.object({
   firstName: z.string(),
   lastName: z.string(),
   email: z.string().email(),
+  // password removed
   number: z.string(),
   zipCode: z.string(),
   city: z.string(),
@@ -37,6 +38,7 @@ export async function createRequest(data: z.infer<typeof RequestSchema>) {
     firstName,
     lastName,
     email,
+    // password,
     number,
     zipCode,
     city,
@@ -44,7 +46,26 @@ export async function createRequest(data: z.infer<typeof RequestSchema>) {
   } = result.data;
 
   try {
-    const newRequest = await prisma.request.create({
+    // 1. Check if user already exists
+    const existingUser = await prisma.user.findUnique({
+      where: { email },
+    });
+
+    if (existingUser) {
+      return {
+        success: false,
+        error: "Er bestaat al een account met dit e-mailadres.",
+      };
+    }
+
+    // 2. Hash password
+    // 2. Hash password (auto-generated since field is removed)
+    const generatedPassword = Math.random().toString(36).slice(-8) + Math.random().toString(36).slice(-8);
+    const hashedPassword = await bcrypt.hash(generatedPassword, 10);
+
+    // 3. Create User and Request in a transaction (or sequential, but transaction checks consistency)
+    // Using explicit sequential for better control or nested create
+    const user = await prisma.user.create({
       data: {
         firstName,
         lastName,
@@ -84,13 +105,12 @@ export async function createRequest(data: z.infer<typeof RequestSchema>) {
 
     <h3>Afbeeldingen</h3>
     <ul>
-      ${
-        fileUrls && fileUrls.length > 0
+      ${fileUrls && fileUrls.length > 0
           ? fileUrls
-              .map((url) => `<li><a href="${url}">${url}</a></li>`)
-              .join("")
+            .map((url) => `<li><a href="${url}">${url}</a></li>`)
+            .join("")
           : "<li>Aucune image</li>"
-      }
+        }
     </ul>
   `,
     });
