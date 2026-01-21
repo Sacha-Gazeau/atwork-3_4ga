@@ -85,12 +85,13 @@ export async function createRequest(data: z.infer<typeof RequestSchema>) {
 
     <h3>Afbeeldingen</h3>
     <ul>
-      ${fileUrls && fileUrls.length > 0
+      ${
+        fileUrls && fileUrls.length > 0
           ? fileUrls
-            .map((url) => `<li><a href="${url}">${url}</a></li>`)
-            .join("")
+              .map((url) => `<li><a href="${url}">${url}</a></li>`)
+              .join("")
           : "<li>Aucune image</li>"
-        }
+      }
     </ul>
   `,
     });
