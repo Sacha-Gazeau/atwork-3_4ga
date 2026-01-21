@@ -10,9 +10,6 @@ const nextConfig = {
       },
     ],
   },
-  experimental: {
-    appDir: true, // nécessaire si tu utilises l'App Router
-  },
 };
 
 module.exports = nextConfig;
