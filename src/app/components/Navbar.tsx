@@ -106,7 +106,7 @@ export default function Navbar() {
                   }`}
                 onClick={closeMenu}
               >
-                Contact
+                Aanvraag
               </Link>
             </li>
             <li className="navbar__item">

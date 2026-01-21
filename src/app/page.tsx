@@ -26,7 +26,7 @@ export default function Home() {
             </p>
           </div>
           <div className="hero__actions">
-            <Link href="/contact" className="hero__button hero__button--primary">
+            <Link href="/aanvraag" className="hero__button hero__button--primary">
               Start nu uw aanvraag
             </Link>
             <Link href="/tuinstijlen" className="hero__button hero__button--secondary">
