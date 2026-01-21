@@ -58,12 +58,30 @@ async function run() {
 
     await transporter.verify();
     console.log("SMTP verify: OK — server accepted connection.");
-  } catch (err: any) {
+  } catch (err: unknown) {
     console.error("SMTP verify failed:");
-    console.error(err && err.code ? `code: ${err.code}` : "no code");
-    console.error(err && err.message ? `message: ${err.message}` : String(err));
-    if (err && err.response) console.error("response:", err.response);
-    if (err && err.stack) console.error(err.stack);
+
+    let code: string | number | undefined;
+    let message = "Unknown error";
+
+    if (err instanceof Error) {
+      message = err.message;
+    }
+
+    if (typeof err === "object" && err !== null) {
+      const e = err as {
+        code?: string | number;
+        response?: unknown;
+        stack?: string;
+      };
+      code = e.code;
+      if (e.response) console.error("response:", e.response);
+      if (e.stack) console.error(e.stack);
+    }
+
+    if (code) console.error(`code: ${code}`);
+    console.error("message:", message);
+
     process.exitCode = 2;
   }
 }

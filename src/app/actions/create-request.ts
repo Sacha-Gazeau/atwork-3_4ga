@@ -1,7 +1,6 @@
 "use server";
 
 import { z } from "zod";
-import * as bcrypt from "bcryptjs";
 import { prisma } from "@/lib/client";
 import { transporter } from "@/lib/mail";
 
@@ -71,22 +70,14 @@ export async function createRequest(data: z.infer<typeof RequestSchema>) {
         firstName,
         lastName,
         email,
-        hashedPassword: hashedPassword,
         phoneNumber: number,
         zipCode,
         city,
-      },
-    });
-
-    // 4. Create Request linked to User
-    const newRequest = await prisma.request.create({
-      data: {
         serviceType,
         gardenStyle: gardenStyle.join(", "),
         deadline,
         budget,
         addons: addons.join(", "),
-        userId: user.id,
         files: {
           create: fileUrls?.map((url) => ({
             url,

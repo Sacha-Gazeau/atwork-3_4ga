@@ -1,3 +1,5 @@
+export const dynamic = "force-dynamic";
+
 import { initEdgeStore } from "@edgestore/server";
 import { createEdgeStoreNextHandler } from "@edgestore/server/adapters/next/app";
 

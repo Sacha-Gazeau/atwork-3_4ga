@@ -1,6 +1,7 @@
 @import url("./style/home.css");
 @import url("./style/faq.css");
 @import url("./style/inspiratie.css");
+@import url("./style/footer.css");
 
 @import "tailwindcss";
 
@@ -12,6 +13,8 @@
   --color-foreground: var(--foreground);
   --font-sans: var(--font-inter), "Odoo Unicode Support Noto", sans-serif;
   --font-mono: monospace;
+  --border-item: #e0d4b3;
+  --dark: #333333;
 }
 
 @theme inline {
@@ -286,7 +289,6 @@ footer.footer {
   font-family: var(--font-inter), "Odoo Unicode Support Noto", sans-serif;
 }
 
-
 .file-upload-input {
   display: none;
 }
@@ -521,7 +523,7 @@ footer.footer {
     min-height: auto;
   }
 
-  footer.footer {
+  .footer {
     margin-top: auto;
     flex-direction: column;
     text-align: center;
@@ -544,6 +546,10 @@ footer.footer {
   .footer--address {
     width: 100%;
     text-align: center;
+  }
+
+  .footer--socials {
+    justify-content: center;
   }
 }
 

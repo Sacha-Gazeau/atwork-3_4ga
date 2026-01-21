@@ -87,10 +87,21 @@ export async function POST(req: Request) {
     });
 
     return jsonResponse({ success: true }, 200);
-  } catch (err: any) {
+  } catch (err: unknown) {
     console.error("/api/contact error:", err);
-    const code = err?.code || err?.errno || null;
-    const message = err?.message || "Server error";
+
+    let code: string | number | null = null;
+    let message = "Server error";
+
+    if (err instanceof Error) {
+      message = err.message;
+    }
+
+    if (typeof err === "object" && err !== null) {
+      const e = err as { code?: string | number; errno?: string | number };
+      code = e.code ?? e.errno ?? null;
+    }
+
     return jsonResponse({ success: false, error: message, code }, 500);
   }
 }
