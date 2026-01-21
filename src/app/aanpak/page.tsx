@@ -45,7 +45,7 @@ export default function Aanpak() {
 
   return (
     <section className="aanpak">
-      <h2 className="aanpak-title">Onze aanpak</h2>
+      <h2 className="page-title">Onze aanpak</h2>
 
       {steps.map((step, index) => (
         <div
